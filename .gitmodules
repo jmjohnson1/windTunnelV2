@@ -1,0 +1,3 @@
+[submodule "embedded/src/arduino-mcp23017"]
+	path = embedded/src/arduino-mcp23017
+	url = https://github.com/blemasle/arduino-mcp23017.git
