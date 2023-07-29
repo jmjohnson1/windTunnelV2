@@ -1,19 +1,29 @@
 #include "mainwindow.h"
-#include "./ui_mainwindow.h"
+#include <QCheckBox>
+#include <QGridLayout>
+#include <QGroupBox>
+#include <QMenu>
+#include <QPushButton>
+#include <QRadioButton>
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
-    ui->setupUi(this);
+MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
+    QGridLayout *grid = new QGridLayout;
+    grid->addWidget(manualFanControlGroup(), 0, 0);
+    setLayout(grid);
+
+    setWindowTitle(tr("Group Boxes"));
+    resize(480, 320);
+}
+
+QGroupBox *MainWindow::manualFanControlGroup() {
+    QGroupBox *groupBox = new QGroupBox(tr("Manual Fan Control"));
+    groupBox->setCheckable(true);
+    groupBox->setChecked(false);
+
     QSlider *slider = new QSlider(Qt::Horizontal, this);
-    slider->setRange(1, 4);
-    slider->setSingleStep(1);
-    ui->gridLayout1->addWidget(slider, 1, 0, 1, 3);
-}
+    QGridLayout *grid = new QGridLayout;
+    grid->addWidget(slider, 0, 0);
 
-MainWindow::~MainWindow()
-{
-    delete ui;
+    groupBox->setLayout(grid);
+    return groupBox;
 }
-

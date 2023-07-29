@@ -1,13 +1,9 @@
+#include <QApplication>
 #include "mainwindow.h"
 
-#include <QApplication>
-#include <QStyleFactory>
-
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    QApplication::setStyle(QStyleFactory::create("Fusion"));
-    MainWindow w;
-    w.show();
-    return a.exec();
+int main(int argc, char *argv[]) {
+    QApplication app(argc, argv);
+    MainWindow window;
+    window.show();
+    return app.exec();
 }

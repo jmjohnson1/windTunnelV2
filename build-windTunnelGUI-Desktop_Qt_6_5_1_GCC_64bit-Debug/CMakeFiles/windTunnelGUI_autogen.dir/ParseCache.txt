@@ -152,6 +152,7 @@
  mdp:/home/james/Qt/6.5.1/gcc_64/include/QtWidgets/QLabel
  mdp:/home/james/Qt/6.5.1/gcc_64/include/QtWidgets/QMainWindow
  mdp:/home/james/Qt/6.5.1/gcc_64/include/QtWidgets/QSlider
+ mdp:/home/james/Qt/6.5.1/gcc_64/include/QtWidgets/QWidget
  mdp:/home/james/Qt/6.5.1/gcc_64/include/QtWidgets/qabstractslider.h
  mdp:/home/james/Qt/6.5.1/gcc_64/include/QtWidgets/qapplication.h
  mdp:/home/james/Qt/6.5.1/gcc_64/include/QtWidgets/qboxlayout.h
@@ -454,4 +455,3 @@
  mdp:/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
 /home/james/Documents/windTunnelV2/windTunnelGUI/main.cpp
 /home/james/Documents/windTunnelV2/windTunnelGUI/mainwindow.cpp
- uic:./ui_mainwindow.h

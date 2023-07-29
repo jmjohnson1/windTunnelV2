@@ -156,6 +156,7 @@ windTunnelGUI_autogen/timestamp: \
 	/home/james/Qt/6.5.1/gcc_64/include/QtWidgets/QLabel \
 	/home/james/Qt/6.5.1/gcc_64/include/QtWidgets/QMainWindow \
 	/home/james/Qt/6.5.1/gcc_64/include/QtWidgets/QSlider \
+	/home/james/Qt/6.5.1/gcc_64/include/QtWidgets/QWidget \
 	/home/james/Qt/6.5.1/gcc_64/include/QtWidgets/qabstractslider.h \
 	/home/james/Qt/6.5.1/gcc_64/include/QtWidgets/qapplication.h \
 	/home/james/Qt/6.5.1/gcc_64/include/QtWidgets/qboxlayout.h \
@@ -698,5 +699,4 @@ windTunnelGUI_autogen/timestamp: \
 	/usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
 	/usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
 	/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
-	/home/james/Documents/windTunnelV2/windTunnelGUI/mainwindow.ui \
 	/home/james/Qt/Tools/CMake/bin/cmake

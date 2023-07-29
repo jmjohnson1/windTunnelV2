@@ -6,20 +6,18 @@
 #include <QGridLayout>
 #include <QSlider>
 #include <QLabel>
+#include <QWidget>
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
+class QGroupBox;
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QWidget {
     Q_OBJECT
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
 
 private:
-    Ui::MainWindow *ui;
+    QGroupBox *manualFanControlGroup();
 };
-#endif // MAINWINDOW_H
+
+#endif
