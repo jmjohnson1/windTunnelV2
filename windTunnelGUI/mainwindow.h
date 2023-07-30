@@ -7,6 +7,7 @@
 #include <QSlider>
 #include <QLabel>
 #include <QWidget>
+#include "valuedslider.h"
 
 class QGroupBox;
 

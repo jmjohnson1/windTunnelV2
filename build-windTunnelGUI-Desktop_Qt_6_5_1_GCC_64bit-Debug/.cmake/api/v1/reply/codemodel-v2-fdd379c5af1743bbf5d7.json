@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-b2bcd7109ed3c8b5c764.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "windTunnelGUI",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "windTunnelGUI::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-windTunnelGUI-Debug-d33b86468fb65b31a06a.json",
+					"name" : "windTunnelGUI",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "windTunnelGUI_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-windTunnelGUI_autogen-Debug-bd1e02c5de284f978ba1.json",
+					"name" : "windTunnelGUI_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "windTunnelGUI_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-windTunnelGUI_autogen_timestamp_deps-Debug-cd5fa97de61870bb7e79.json",
+					"name" : "windTunnelGUI_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/james/Documents/windTunnelV2/build-windTunnelGUI-Desktop_Qt_6_5_1_GCC_64bit-Debug",
+		"source" : "/home/james/Documents/windTunnelV2/windTunnelGUI"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

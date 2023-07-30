@@ -24,6 +24,9 @@ QGroupBox *MainWindow::manualFanControlGroup() {
     QGridLayout *grid = new QGridLayout;
     grid->addWidget(slider, 0, 0);
 
+    ValuedSlider *slider2 = new ValuedSlider(Qt::Horizontal, this);
+    grid->addWidget(slider2, 1, 0);
+
     groupBox->setLayout(grid);
     return groupBox;
 }
