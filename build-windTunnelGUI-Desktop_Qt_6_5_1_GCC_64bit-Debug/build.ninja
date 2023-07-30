@@ -73,6 +73,14 @@ build CMakeFiles/windTunnelGUI.dir/mainwindow.cpp.o: CXX_COMPILER__windTunnelGUI
   OBJECT_DIR = CMakeFiles/windTunnelGUI.dir
   OBJECT_FILE_DIR = CMakeFiles/windTunnelGUI.dir
 
+build CMakeFiles/windTunnelGUI.dir/valuedslider.cpp.o: CXX_COMPILER__windTunnelGUI_Debug /home/james/Documents/windTunnelV2/windTunnelGUI/valuedslider.cpp || cmake_object_order_depends_target_windTunnelGUI
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
+  DEP_FILE = CMakeFiles/windTunnelGUI.dir/valuedslider.cpp.o.d
+  FLAGS = -DQT_QML_DEBUG -g -fPIC -std=gnu++17
+  INCLUDES = -I/home/james/Documents/windTunnelV2/build-windTunnelGUI-Desktop_Qt_6_5_1_GCC_64bit-Debug/windTunnelGUI_autogen/include -isystem /home/james/Qt/6.5.1/gcc_64/include/QtCore -isystem /home/james/Qt/6.5.1/gcc_64/include -isystem /home/james/Qt/6.5.1/gcc_64/mkspecs/linux-g++ -isystem /home/james/Qt/6.5.1/gcc_64/include/QtWidgets -isystem /home/james/Qt/6.5.1/gcc_64/include/QtGui
+  OBJECT_DIR = CMakeFiles/windTunnelGUI.dir
+  OBJECT_FILE_DIR = CMakeFiles/windTunnelGUI.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target windTunnelGUI
@@ -81,7 +89,7 @@ build CMakeFiles/windTunnelGUI.dir/mainwindow.cpp.o: CXX_COMPILER__windTunnelGUI
 #############################################
 # Link the executable windTunnelGUI
 
-build windTunnelGUI: CXX_EXECUTABLE_LINKER__windTunnelGUI_Debug CMakeFiles/windTunnelGUI.dir/windTunnelGUI_autogen/mocs_compilation.cpp.o CMakeFiles/windTunnelGUI.dir/main.cpp.o CMakeFiles/windTunnelGUI.dir/mainwindow.cpp.o | /home/james/Qt/6.5.1/gcc_64/lib/libQt6Widgets.so.6.5.1 /home/james/Qt/6.5.1/gcc_64/lib/libQt6Gui.so.6.5.1 /home/james/Qt/6.5.1/gcc_64/lib/libQt6Core.so.6.5.1 /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libOpenGL.so || windTunnelGUI_autogen windTunnelGUI_autogen_timestamp_deps
+build windTunnelGUI: CXX_EXECUTABLE_LINKER__windTunnelGUI_Debug CMakeFiles/windTunnelGUI.dir/windTunnelGUI_autogen/mocs_compilation.cpp.o CMakeFiles/windTunnelGUI.dir/main.cpp.o CMakeFiles/windTunnelGUI.dir/mainwindow.cpp.o CMakeFiles/windTunnelGUI.dir/valuedslider.cpp.o | /home/james/Qt/6.5.1/gcc_64/lib/libQt6Widgets.so.6.5.1 /home/james/Qt/6.5.1/gcc_64/lib/libQt6Gui.so.6.5.1 /home/james/Qt/6.5.1/gcc_64/lib/libQt6Core.so.6.5.1 /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libOpenGL.so || windTunnelGUI_autogen windTunnelGUI_autogen_timestamp_deps
   FLAGS = -DQT_QML_DEBUG -g
   LINK_LIBRARIES = -Wl,-rpath,/home/james/Qt/6.5.1/gcc_64/lib:  /home/james/Qt/6.5.1/gcc_64/lib/libQt6Widgets.so.6.5.1  /home/james/Qt/6.5.1/gcc_64/lib/libQt6Gui.so.6.5.1  /home/james/Qt/6.5.1/gcc_64/lib/libQt6Core.so.6.5.1  /usr/lib/x86_64-linux-gnu/libGLX.so  /usr/lib/x86_64-linux-gnu/libOpenGL.so
   OBJECT_DIR = CMakeFiles/windTunnelGUI.dir
