@@ -1,5 +1,7 @@
 #include "src/arduino-mcp23017/src/MCP23017.h"
 #include "src/ams5812/src/ams5812.h"
+#include "commands.h"
+#include "Wire.h"
 
 // MCP23017 //
 const uint8_t MCP_addr = 0x00;
@@ -50,6 +52,7 @@ uint8_t pinArray[20] = {
 	sol20_pin
 };
 
+float pressureTapSampleFreq = 1; 	// Hz
 
 // AMS 5812 //
 const uint8_t pSensor1_addr = 0x04;
@@ -63,13 +66,15 @@ void setup() {
 	Serial.begin(9600);
 	Wire.begin();
 	Wire.setClock(400000); // Fast mode
-	if (!pSensor1.Begin()) {
-		Serial.println("Pressure sensor 1 failed to initialize");
-	}
-	if (!pSensor2.Begin()) {
-		Serial.println("Pressure sensor 2 failed to initialize");
-	}
+	// if (!pSensor1.Begin()) {
+	// 	Serial.println("Pressure sensor 1 failed to initialize");
+	// }
+	// if (!pSensor2.Begin()) {
+	// 	Serial.println("Pressure sensor 2 failed to initialize");
+	// }
+  Serial.println("Before mcp");
 	mcp.begin();
+  Serial.println("After mcp.");
 	// Configure all pins on MCP as outputs
 	mcp.portMode(MCP23017Port::A, 0);
 	mcp.portMode(MCP23017Port::B, 0);
@@ -77,21 +82,24 @@ void setup() {
 	for (int i = 16; i < 20; i++) {
 		pinMode(pinArray[i], OUTPUT);
 	}
+  Serial.println("Finished setup");
 }
 
 void loop() {
-	
+	scanPressureTaps();
+  Serial.println("Scan Complete");
 }
 
 void scanPressureTaps() {
 	for (int i = 0; i < 20; i++) {
+    Serial.println(i);
 		if (i > 15) {
 			digitalWrite(pinArray[i], 1);
-			delay(1000);
+			delay(1.0f/pressureTapSampleFreq*1000.0f);
 			digitalWrite(pinArray[i], 0);
 		} else {
 			mcp.digitalWrite(pinArray[i], 1);
-			delay(1000);
+			delay(1.0f/pressureTapSampleFreq*1000.0f);
 			mcp.digitalWrite(pinArray[i], 0);
 		}
 	}

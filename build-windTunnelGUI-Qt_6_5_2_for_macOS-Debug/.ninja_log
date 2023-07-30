@@ -1,0 +1,9 @@
+# ninja log v5
+0	363	1690757238829691155	windTunnelGUI_autogen/timestamp	8088e11268c85b2
+0	363	1690757238829691155	windTunnelGUI_autogen/mocs_compilation.cpp	8088e11268c85b2
+0	363	1690757238829691155	/Users/james/Documents/windTunnelV2/build-windTunnelGUI-Qt_6_5_2_for_macOS-Debug/windTunnelGUI_autogen/timestamp	8088e11268c85b2
+0	363	1690757238829691155	/Users/james/Documents/windTunnelV2/build-windTunnelGUI-Qt_6_5_2_for_macOS-Debug/windTunnelGUI_autogen/mocs_compilation.cpp	8088e11268c85b2
+363	971	1690757239438947693	CMakeFiles/windTunnelGUI.dir/main.cpp.o	480f3c247addf1fe
+363	974	1690757239440232224	CMakeFiles/windTunnelGUI.dir/mainwindow.cpp.o	a7272f7012bb31ab
+363	998	1690757239467781545	CMakeFiles/windTunnelGUI.dir/windTunnelGUI_autogen/mocs_compilation.cpp.o	8e8ee27e1662e014
+998	1152	1690757239623990110	windTunnelGUI.app/Contents/MacOS/windTunnelGUI	9636005eb32582cf
