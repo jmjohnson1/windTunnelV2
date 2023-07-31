@@ -6,7 +6,7 @@ void ValuedSlider::paintEvent(QPaintEvent *event) {
     auto round_value = std::floor(value());
 
     QPainter painter(this);
-    painter.setPen(QPen(Qt::white));
+    painter.setPen(QPen(Qt::red));
 
     auto font_metrics = QFontMetrics(this->font());
     auto font_width = font_metrics.boundingRect(QString::number(round_value)).width();

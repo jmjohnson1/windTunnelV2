@@ -12,13 +12,14 @@
 class QGroupBox;
 
 class MainWindow : public QWidget {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+  MainWindow(QWidget *parent = nullptr);
 
 private:
-    QGroupBox *manualFanControlGroup();
+  QGroupBox *manualFanControlGroup();
+  QGroupBox *automaticSpeedGroup();
 };
 
 #endif

@@ -19,14 +19,20 @@ QGroupBox *MainWindow::manualFanControlGroup() {
     QGroupBox *groupBox = new QGroupBox(tr("Manual Fan Control"));
     groupBox->setCheckable(true);
     groupBox->setChecked(false);
-
-    QSlider *slider = new QSlider(Qt::Horizontal, this);
     QGridLayout *grid = new QGridLayout;
-    grid->addWidget(slider, 0, 0);
 
-    ValuedSlider *slider2 = new ValuedSlider(Qt::Horizontal, this);
-    grid->addWidget(slider2, 1, 0);
+    QLabel *fan1Label = new QLabel(tr("Fan 1:"));
+    grid->addWidget(fan1Label, 0, 0);
+    ValuedSlider *fan1Slider = new ValuedSlider(Qt::Horizontal, this);
+    grid->addWidget(fan1Slider, 1, 0);
+
+    QLabel *fan2Label = new QLabel(tr("Fan 2:"));
+    grid->addWidget(fan2Label, 2, 0);
+    ValuedSlider *fan2Slider = new ValuedSlider(Qt::Horizontal, this);
+    grid->addWidget(fan2Slider, 3, 0);
 
     groupBox->setLayout(grid);
     return groupBox;
 }
+
+void MainWindow::fan1ManualSliderChanged()
