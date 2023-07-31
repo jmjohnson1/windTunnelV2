@@ -1,0 +1,15 @@
+# ninja log v5
+0	194	1690769568789390946	GUI_ui_autogen/timestamp	9e24861c164d30d3
+0	194	1690769568789390946	GUI_ui_autogen/mocs_compilation.cpp	9e24861c164d30d3
+0	194	1690769568789390946	/home/james/Documents/windTunnelV2/build-GUI_ui-Desktop_Qt_6_5_1_GCC_64bit-Debug/GUI_ui_autogen/timestamp	9e24861c164d30d3
+0	194	1690769568789390946	/home/james/Documents/windTunnelV2/build-GUI_ui-Desktop_Qt_6_5_1_GCC_64bit-Debug/GUI_ui_autogen/mocs_compilation.cpp	9e24861c164d30d3
+195	1192	1690769569785407901	CMakeFiles/GUI_ui.dir/GUI_ui_autogen/mocs_compilation.cpp.o	cc96d1335c9c8077
+195	1230	1690769569825408583	CMakeFiles/GUI_ui.dir/main.cpp.o	a6dda55f93ab7630
+195	1304	1690769569897409808	CMakeFiles/GUI_ui.dir/mainwindow.cpp.o	2934411e63f4ef75
+1304	1494	1690769570089413075	GUI_ui	b72fd749f4d250e5
+1	10	1690769912355298001	GUI_ui_autogen/timestamp	9e24861c164d30d3
+1	10	1690769912355298001	GUI_ui_autogen/mocs_compilation.cpp	9e24861c164d30d3
+1	10	1690769912355298001	/home/james/Documents/windTunnelV2/build-GUI_ui-Desktop_Qt_6_5_1_GCC_64bit-Debug/GUI_ui_autogen/timestamp	9e24861c164d30d3
+1	10	1690769912355298001	/home/james/Documents/windTunnelV2/build-GUI_ui-Desktop_Qt_6_5_1_GCC_64bit-Debug/GUI_ui_autogen/mocs_compilation.cpp	9e24861c164d30d3
+11	1061	1690769913407316389	CMakeFiles/GUI_ui.dir/mainwindow.cpp.o	2934411e63f4ef75
+1061	1253	1690769913595319675	GUI_ui	b72fd749f4d250e5

@@ -35,4 +35,6 @@ QGroupBox *MainWindow::manualFanControlGroup() {
     return groupBox;
 }
 
-void MainWindow::fan1ManualSliderChanged()
+void MainWindow::fan1ManualSliderChanged() {
+
+}
