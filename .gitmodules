@@ -4,3 +4,6 @@
 [submodule "embedded/src/ams5812"]
 	path = embedded/src/ams5812
 	url = https://github.com/bolderflight/ams5812.git
+[submodule "embedded/src/ArduinoSerialCommand"]
+	path = embedded/src/ArduinoSerialCommand
+	url = https://github.com/scogswell/ArduinoSerialCommand.git
