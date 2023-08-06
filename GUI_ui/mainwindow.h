@@ -2,10 +2,14 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QSerialPort>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
+
+class QLabel;
+class SettingsDialog;
 
 class MainWindow : public QMainWindow
 {
@@ -15,7 +19,32 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void openSerialPort();
+    void closeSerialPort();
+    void updateFanManualSliderReadout(int position);
+    void updateFanAutoSliderReadout(int position);
+    void autoSpeedSet();
+    void writeData(const QByteArray &data);
+    void readData();
+
+    void handleError(QSerialPort::SerialPortError error);
+    void handleBytesWritten(qint64 bytes);
+    void handleWriteTimeout();
+
+    void manualPowerSet();
+
+private:
+    void initActionsConnections();
+    void showStatusMessage(const QString &message);
+    void showWriteError(const QString &message);
+
 private:
     Ui::MainWindow *ui;
+    QLabel *m_status = nullptr;
+    SettingsDialog *m_settings = nullptr;
+    qint64 m_bytesToWrite = 0;
+    QTimer *m_timer = nullptr;
+    QSerialPort *m_serial = nullptr;
 };
 #endif // MAINWINDOW_H

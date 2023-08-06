@@ -7,7 +7,7 @@
 				{
 					"build" : ".",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-.-Debug-66e3276de386ace3d82f.json",
+					"jsonFile" : "directory-.-Debug-a717848146910f96ce08.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.16"
@@ -44,7 +44,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "GUI_ui::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-GUI_ui-Debug-8439f5f7aa6cae9d33a1.json",
+					"jsonFile" : "target-GUI_ui-Debug-3d2691a673ee1db5a586.json",
 					"name" : "GUI_ui",
 					"projectIndex" : 0
 				},

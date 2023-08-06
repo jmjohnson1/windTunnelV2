@@ -3,6 +3,8 @@ GUI_ui_autogen/timestamp: \
 	/home/james/Documents/windTunnelV2/GUI_ui/main.cpp \
 	/home/james/Documents/windTunnelV2/GUI_ui/mainwindow.cpp \
 	/home/james/Documents/windTunnelV2/GUI_ui/mainwindow.h \
+	/home/james/Documents/windTunnelV2/GUI_ui/settingsdialog.cpp \
+	/home/james/Documents/windTunnelV2/GUI_ui/settingsdialog.h \
 	/home/james/Documents/windTunnelV2/build-GUI_ui-Desktop_Qt_6_5_1_GCC_64bit-Debug/.qtc/package-manager/auto-setup.cmake \
 	/home/james/Documents/windTunnelV2/build-GUI_ui-Desktop_Qt_6_5_1_GCC_64bit-Debug/CMakeFiles/3.24.2/CMakeCXXCompiler.cmake \
 	/home/james/Documents/windTunnelV2/build-GUI_ui-Desktop_Qt_6_5_1_GCC_64bit-Debug/CMakeFiles/3.24.2/CMakeSystem.cmake \
@@ -46,6 +48,7 @@ GUI_ui_autogen/timestamp: \
 	/home/james/Qt/6.5.1/gcc_64/include/QtCore/qglobalstatic.h \
 	/home/james/Qt/6.5.1/gcc_64/include/QtCore/qhash.h \
 	/home/james/Qt/6.5.1/gcc_64/include/QtCore/qhashfunctions.h \
+	/home/james/Qt/6.5.1/gcc_64/include/QtCore/qiodevice.h \
 	/home/james/Qt/6.5.1/gcc_64/include/QtCore/qiodevicebase.h \
 	/home/james/Qt/6.5.1/gcc_64/include/QtCore/qiterable.h \
 	/home/james/Qt/6.5.1/gcc_64/include/QtCore/qiterator.h \
@@ -138,7 +141,13 @@ GUI_ui_autogen/timestamp: \
 	/home/james/Qt/6.5.1/gcc_64/include/QtGui/qtguiglobal.h \
 	/home/james/Qt/6.5.1/gcc_64/include/QtGui/qtransform.h \
 	/home/james/Qt/6.5.1/gcc_64/include/QtGui/qwindowdefs.h \
+	/home/james/Qt/6.5.1/gcc_64/include/QtSerialPort/QSerialPort \
+	/home/james/Qt/6.5.1/gcc_64/include/QtSerialPort/qserialport.h \
+	/home/james/Qt/6.5.1/gcc_64/include/QtSerialPort/qserialportglobal.h \
+	/home/james/Qt/6.5.1/gcc_64/include/QtSerialPort/qtserialportexports.h \
+	/home/james/Qt/6.5.1/gcc_64/include/QtWidgets/QDialog \
 	/home/james/Qt/6.5.1/gcc_64/include/QtWidgets/QMainWindow \
+	/home/james/Qt/6.5.1/gcc_64/include/QtWidgets/qdialog.h \
 	/home/james/Qt/6.5.1/gcc_64/include/QtWidgets/qmainwindow.h \
 	/home/james/Qt/6.5.1/gcc_64/include/QtWidgets/qsizepolicy.h \
 	/home/james/Qt/6.5.1/gcc_64/include/QtWidgets/qtabwidget.h \
@@ -339,6 +348,14 @@ GUI_ui_autogen/timestamp: \
 	/home/james/Qt/6.5.1/gcc_64/lib/cmake/Qt6GuiTools/Qt6GuiToolsTargets-relwithdebinfo.cmake \
 	/home/james/Qt/6.5.1/gcc_64/lib/cmake/Qt6GuiTools/Qt6GuiToolsTargets.cmake \
 	/home/james/Qt/6.5.1/gcc_64/lib/cmake/Qt6GuiTools/Qt6GuiToolsVersionlessTargets.cmake \
+	/home/james/Qt/6.5.1/gcc_64/lib/cmake/Qt6SerialPort/Qt6SerialPortAdditionalTargetInfo.cmake \
+	/home/james/Qt/6.5.1/gcc_64/lib/cmake/Qt6SerialPort/Qt6SerialPortConfig.cmake \
+	/home/james/Qt/6.5.1/gcc_64/lib/cmake/Qt6SerialPort/Qt6SerialPortConfigVersion.cmake \
+	/home/james/Qt/6.5.1/gcc_64/lib/cmake/Qt6SerialPort/Qt6SerialPortConfigVersionImpl.cmake \
+	/home/james/Qt/6.5.1/gcc_64/lib/cmake/Qt6SerialPort/Qt6SerialPortDependencies.cmake \
+	/home/james/Qt/6.5.1/gcc_64/lib/cmake/Qt6SerialPort/Qt6SerialPortTargets-relwithdebinfo.cmake \
+	/home/james/Qt/6.5.1/gcc_64/lib/cmake/Qt6SerialPort/Qt6SerialPortTargets.cmake \
+	/home/james/Qt/6.5.1/gcc_64/lib/cmake/Qt6SerialPort/Qt6SerialPortVersionlessTargets.cmake \
 	/home/james/Qt/6.5.1/gcc_64/lib/cmake/Qt6Widgets/Qt6WidgetsAdditionalTargetInfo.cmake \
 	/home/james/Qt/6.5.1/gcc_64/lib/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake \
 	/home/james/Qt/6.5.1/gcc_64/lib/cmake/Qt6Widgets/Qt6WidgetsConfigVersion.cmake \
@@ -356,76 +373,22 @@ GUI_ui_autogen/timestamp: \
 	/home/james/Qt/6.5.1/gcc_64/lib/cmake/Qt6WidgetsTools/Qt6WidgetsToolsTargets-relwithdebinfo.cmake \
 	/home/james/Qt/6.5.1/gcc_64/lib/cmake/Qt6WidgetsTools/Qt6WidgetsToolsTargets.cmake \
 	/home/james/Qt/6.5.1/gcc_64/lib/cmake/Qt6WidgetsTools/Qt6WidgetsToolsVersionlessTargets.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeCXXCompiler.cmake.in \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeCXXCompilerABI.cpp \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeCXXInformation.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeCompilerIdDetection.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeDetermineCXXCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeDetermineCompileFeatures.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeDetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeDetermineCompilerABI.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeDetermineCompilerId.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeDetermineSystem.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeFindBinUtils.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeGenericSystem.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeNinjaFindMake.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeParseImplicitIncludeInfo.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeParseImplicitLinkInfo.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeParseLibraryArchitecture.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeSystem.cmake.in \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeTestCXXCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CMakeTestCompilerCommon.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CheckCXXCompilerFlag.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CheckCXXSourceCompiles.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CheckIncludeFileCXX.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/CheckLibraryExists.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/ADSP-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/ARMCC-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/ARMClang-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/AppleClang-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/Borland-DetermineCompiler.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/Clang-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/Clang-DetermineCompilerInternal.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/Cray-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/Embarcadero-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/Fujitsu-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/GHS-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/GNU-CXX.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/GNU-FindBinUtils.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/GNU.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/HP-CXX-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/IAR-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/Intel-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/MSVC-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/NVHPC-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/NVIDIA-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/PGI-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/PathScale-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/SCO-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/TI-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/Watcom-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/XL-CXX-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/FeatureSummary.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/FindOpenGL.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake \
@@ -437,9 +400,7 @@ GUI_ui_autogen/timestamp: \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Internal/CheckCompilerFlag.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Internal/CheckFlagCommonConfig.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Internal/CheckSourceCompiles.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Internal/FeatureTesting.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/MacroAddFileDependencies.cmake \
-	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Platform/Linux-Determine-CXX.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Platform/Linux-GNU-CXX.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Platform/Linux-GNU.cmake \
 	/home/james/Qt/Tools/CMake/share/cmake-3.24/Modules/Platform/Linux.cmake \
@@ -729,4 +690,5 @@ GUI_ui_autogen/timestamp: \
 	/usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
 	/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
 	/home/james/Documents/windTunnelV2/GUI_ui/mainwindow.ui \
+	/home/james/Documents/windTunnelV2/GUI_ui/settingsdialog.ui \
 	/home/james/Qt/Tools/CMake/bin/cmake
