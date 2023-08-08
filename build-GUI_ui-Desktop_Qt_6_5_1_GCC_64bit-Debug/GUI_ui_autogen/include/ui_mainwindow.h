@@ -10,6 +10,7 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
@@ -21,6 +22,7 @@
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -28,18 +30,19 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *actionDisconnect;
+    QAction *actionConfigure;
+    QAction *actionConnect;
     QWidget *centralwidget;
     QGroupBox *testSectionSpeedGroup;
     QGridLayout *gridLayout_3;
     QGroupBox *manualFanControlGroup;
     QGridLayout *gridLayout;
-    QLabel *fan2ManualSliderReadout;
-    QPushButton *manualFanSetButton;
-    QLabel *fan1ManualSliderReadout;
-    QSpacerItem *horizontalSpacer_3;
-    QSpacerItem *horizontalSpacer_4;
-    QSlider *fan2ManualSlider;
     QSlider *fan1ManualSlider;
+    QSpacerItem *horizontalSpacer_4;
+    QLabel *fan1ManualSliderReadout;
+    QPushButton *manualFanSetButton;
+    QSpacerItem *horizontalSpacer_3;
     QGroupBox *autoSpeedControlGroup;
     QGridLayout *gridLayout_2;
     QPushButton *autoSpeedSetButton;
@@ -51,22 +54,29 @@ public:
     QGridLayout *gridLayout_4;
     QGroupBox *groupBox_2;
     QGridLayout *gridLayout_5;
-    QLCDNumber *lcdNumber_2;
-    QLCDNumber *lcdNumber_4;
-    QLCDNumber *lcdNumber;
-    QLCDNumber *lcdNumber_3;
+    QLCDNumber *staticPressureLCD;
+    QLCDNumber *speedSetpointLCD;
+    QLCDNumber *totalPressureLCD;
+    QLCDNumber *speedLCD;
     QLabel *label;
     QLabel *label_2;
     QLabel *label_3;
     QLabel *label_4;
     QMenuBar *menubar;
     QStatusBar *statusbar;
+    QToolBar *toolBar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
         MainWindow->resize(800, 600);
+        actionDisconnect = new QAction(MainWindow);
+        actionDisconnect->setObjectName("actionDisconnect");
+        actionConfigure = new QAction(MainWindow);
+        actionConfigure->setObjectName("actionConfigure");
+        actionConnect = new QAction(MainWindow);
+        actionConnect->setObjectName("actionConnect");
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         testSectionSpeedGroup = new QGroupBox(centralwidget);
@@ -80,40 +90,29 @@ public:
         manualFanControlGroup->setChecked(false);
         gridLayout = new QGridLayout(manualFanControlGroup);
         gridLayout->setObjectName("gridLayout");
-        fan2ManualSliderReadout = new QLabel(manualFanControlGroup);
-        fan2ManualSliderReadout->setObjectName("fan2ManualSliderReadout");
+        fan1ManualSlider = new QSlider(manualFanControlGroup);
+        fan1ManualSlider->setObjectName("fan1ManualSlider");
+        fan1ManualSlider->setOrientation(Qt::Horizontal);
 
-        gridLayout->addWidget(fan2ManualSliderReadout, 1, 2, 1, 1);
+        gridLayout->addWidget(fan1ManualSlider, 0, 0, 1, 2);
 
-        manualFanSetButton = new QPushButton(manualFanControlGroup);
-        manualFanSetButton->setObjectName("manualFanSetButton");
+        horizontalSpacer_4 = new QSpacerItem(30, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout->addWidget(manualFanSetButton, 2, 1, 1, 1);
+        gridLayout->addItem(horizontalSpacer_4, 1, 2, 1, 1);
 
         fan1ManualSliderReadout = new QLabel(manualFanControlGroup);
         fan1ManualSliderReadout->setObjectName("fan1ManualSliderReadout");
 
         gridLayout->addWidget(fan1ManualSliderReadout, 0, 2, 1, 1);
 
+        manualFanSetButton = new QPushButton(manualFanControlGroup);
+        manualFanSetButton->setObjectName("manualFanSetButton");
+
+        gridLayout->addWidget(manualFanSetButton, 1, 1, 1, 1);
+
         horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout->addItem(horizontalSpacer_3, 2, 0, 1, 1);
-
-        horizontalSpacer_4 = new QSpacerItem(30, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout->addItem(horizontalSpacer_4, 2, 2, 1, 1);
-
-        fan2ManualSlider = new QSlider(manualFanControlGroup);
-        fan2ManualSlider->setObjectName("fan2ManualSlider");
-        fan2ManualSlider->setOrientation(Qt::Horizontal);
-
-        gridLayout->addWidget(fan2ManualSlider, 1, 0, 1, 2);
-
-        fan1ManualSlider = new QSlider(manualFanControlGroup);
-        fan1ManualSlider->setObjectName("fan1ManualSlider");
-        fan1ManualSlider->setOrientation(Qt::Horizontal);
-
-        gridLayout->addWidget(fan1ManualSlider, 0, 0, 1, 2);
+        gridLayout->addItem(horizontalSpacer_3, 1, 0, 1, 1);
 
 
         gridLayout_3->addWidget(manualFanControlGroup, 0, 0, 1, 1);
@@ -158,25 +157,25 @@ public:
         groupBox_2->setObjectName("groupBox_2");
         gridLayout_5 = new QGridLayout(groupBox_2);
         gridLayout_5->setObjectName("gridLayout_5");
-        lcdNumber_2 = new QLCDNumber(groupBox_2);
-        lcdNumber_2->setObjectName("lcdNumber_2");
+        staticPressureLCD = new QLCDNumber(groupBox_2);
+        staticPressureLCD->setObjectName("staticPressureLCD");
 
-        gridLayout_5->addWidget(lcdNumber_2, 1, 1, 1, 1);
+        gridLayout_5->addWidget(staticPressureLCD, 1, 1, 1, 1);
 
-        lcdNumber_4 = new QLCDNumber(groupBox_2);
-        lcdNumber_4->setObjectName("lcdNumber_4");
+        speedSetpointLCD = new QLCDNumber(groupBox_2);
+        speedSetpointLCD->setObjectName("speedSetpointLCD");
 
-        gridLayout_5->addWidget(lcdNumber_4, 3, 1, 1, 1);
+        gridLayout_5->addWidget(speedSetpointLCD, 3, 1, 1, 1);
 
-        lcdNumber = new QLCDNumber(groupBox_2);
-        lcdNumber->setObjectName("lcdNumber");
+        totalPressureLCD = new QLCDNumber(groupBox_2);
+        totalPressureLCD->setObjectName("totalPressureLCD");
 
-        gridLayout_5->addWidget(lcdNumber, 0, 1, 1, 1);
+        gridLayout_5->addWidget(totalPressureLCD, 0, 1, 1, 1);
 
-        lcdNumber_3 = new QLCDNumber(groupBox_2);
-        lcdNumber_3->setObjectName("lcdNumber_3");
+        speedLCD = new QLCDNumber(groupBox_2);
+        speedLCD->setObjectName("speedLCD");
 
-        gridLayout_5->addWidget(lcdNumber_3, 2, 1, 1, 1);
+        gridLayout_5->addWidget(speedLCD, 2, 1, 1, 1);
 
         label = new QLabel(groupBox_2);
         label->setObjectName("label");
@@ -209,6 +208,13 @@ public:
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
         MainWindow->setStatusBar(statusbar);
+        toolBar = new QToolBar(MainWindow);
+        toolBar->setObjectName("toolBar");
+        MainWindow->addToolBar(Qt::TopToolBarArea, toolBar);
+
+        toolBar->addAction(actionConnect);
+        toolBar->addAction(actionDisconnect);
+        toolBar->addAction(actionConfigure);
 
         retranslateUi(MainWindow);
 
@@ -218,11 +224,13 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        actionDisconnect->setText(QCoreApplication::translate("MainWindow", "Disconnect", nullptr));
+        actionConfigure->setText(QCoreApplication::translate("MainWindow", "Configure", nullptr));
+        actionConnect->setText(QCoreApplication::translate("MainWindow", "Connect", nullptr));
         testSectionSpeedGroup->setTitle(QCoreApplication::translate("MainWindow", "Test Section Speed", nullptr));
         manualFanControlGroup->setTitle(QCoreApplication::translate("MainWindow", "Manual Fan Control", nullptr));
-        fan2ManualSliderReadout->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        manualFanSetButton->setText(QCoreApplication::translate("MainWindow", "Set", nullptr));
         fan1ManualSliderReadout->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        manualFanSetButton->setText(QCoreApplication::translate("MainWindow", "Set", nullptr));
         autoSpeedControlGroup->setTitle(QCoreApplication::translate("MainWindow", "Speed Selection", nullptr));
         autoSpeedSetButton->setText(QCoreApplication::translate("MainWindow", "Set", nullptr));
         autoSpeedSliderReadout->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
@@ -232,6 +240,7 @@ public:
         label_2->setText(QCoreApplication::translate("MainWindow", "Static Pressure", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "Speed", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "Speed Setpoint", nullptr));
+        toolBar->setWindowTitle(QCoreApplication::translate("MainWindow", "toolBar", nullptr));
     } // retranslateUi
 
 };
