@@ -1,19 +1,24 @@
 #include "Wire.h"
-#include "pressureTap.h"
-#include "src/ams5812/src/ams5812.h"
+#include "Servo.h"
+
+#include "src/ams5915/src/ams5915.h"
 #include "src/arduino-mcp23017/src/MCP23017.h"
 #include "src/ArduinoSerialCommand/SerialCommand.h"
+
+#include "pressureTap.h"
+
+#define MSG_ID_AIRSPEED 2
+#define MSG_ID_PRESSURE_TAP_READINGS 1
 
 // MCP23017 //
 const uint8_t MCP_addr = 0x20;
 MCP23017 mcp = MCP23017(MCP_addr, Wire);
 
-
-// AMS 5812 //
-const uint8_t pSensorTaps_addr = 0x04;
-const uint8_t pSensorAspd_addr = 0x05;
-bfs::Ams5812 pSensorTaps(&Wire, pSensorTaps_addr, bfs::Ams5812::AMS5812_0003_D);
-bfs::Ams5812 pSensorAspd(&Wire, pSensorAspd_addr, bfs::Ams5812::AMS5812_0003_D);
+// AMS 5915 //
+const uint8_t pSensorTaps_addr = 0x22;
+const uint8_t pSensorAspd_addr = 0x23;
+bfs::Ams5915 pSensorTaps(&Wire, pSensorTaps_addr, bfs::Ams5915::AMS5915_0020_D_B);
+bfs::Ams5915 pSensorAspd(&Wire, pSensorAspd_addr, bfs::Ams5915::AMS5915_0020_D_B);
 
 // Solenoid valve pins //
 const uint8_t sol1_pinMCP = 0;
@@ -60,12 +65,17 @@ pressureTap valveArray[] = {
 	pressureTap(sol20_pin, 0, &pSensorTaps, &mcp)
 };
 
-float pressureTapSampleFreq = 1; // Hz
+// Fans
+const uint8_t fan1Pin = 4;
+const uint8_t fan2Pin = 5;
+Servo fan1;
+Servo fan2;
 
 SerialCommand sCmd;
 
 void ScanPressureTaps() {
-	Serial.print("<1");
+	Serial.print("<");
+  Serial.print(MSG_ID_PRESSURE_TAP_READINGS);
 	for (int i = 0; i < 20; i++){
 		valveArray[i].UpdatePressure();
 		Serial.print(",");
@@ -77,9 +87,21 @@ void ScanPressureTaps() {
 void GetAirspeed() {
 	float deltaP = pSensorAspd.pres_pa();
 	float aspd = sqrt(2.0f*deltaP / 1.225f);
-	Serial.print("<2,");
+	Serial.print("<");
+  Serial.print(MSG_ID_AIRSPEED);
+  Serial.print(",");
 	Serial.print(aspd);
 	Serial.println(">");
+}
+
+void SetFanPower() {
+  char *arg;
+  arg = sCmd.next();
+  int power = *arg - '0'; // Subtracting ASCII "0" from an ASCII character for an integer gives the integer
+  // Need to scale this to be bewteen 0 and 180
+  int powerScaled = power/100.0f * 180.0f;
+  fan1.write(powerScaled);
+  fan2.write(powerScaled);
 }
 
 void unrecognized()
@@ -88,9 +110,12 @@ void unrecognized()
 }
 
 void setup() {
+  Serial.println("Initializing...");
   Serial.begin(9600);
   Wire.begin();
   Wire.setClock(100000);
+  fan1.attach(fan1Pin);
+  fan2.attach(fan2Pin);
   if (!pSensorTaps.Begin()) {
     Serial.println("Pressure sensor 1 failed to initialize");
   }
@@ -107,12 +132,12 @@ void setup() {
   }
 	
 	// Commands
-	sCmd.addCommand("SCANTAPS", ScanPressureTaps);
+	sCmd.addCommand("!SCANTAPS", ScanPressureTaps);
 	//sCmd.addCommand("!SETSPEEDAUTO", AutoSpeedControlSet);
-	//sCmd.addCommand("!SETPOWER", SetFanPower);
+	sCmd.addCommand("!SETPOWER", SetFanPower);
   sCmd.addDefaultHandler(unrecognized);  // Handler for command that isn't matched  (says "What?") 
 
-  Serial.println("Finished setup");
+  Serial.println("Setup complete");
 }
 
 void loop() {

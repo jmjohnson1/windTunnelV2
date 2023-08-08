@@ -7,3 +7,6 @@
 [submodule "embedded/src/ArduinoSerialCommand"]
 	path = embedded/src/ArduinoSerialCommand
 	url = https://github.com/scogswell/ArduinoSerialCommand.git
+[submodule "embedded/src/ams5915"]
+	path = embedded/src/ams5915
+	url = https://github.com/bolderflight/ams5915.git
