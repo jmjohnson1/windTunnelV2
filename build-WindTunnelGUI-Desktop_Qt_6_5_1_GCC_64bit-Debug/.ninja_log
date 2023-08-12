@@ -1,0 +1,22 @@
+# ninja log v5
+4	26	1691854841087458535	WindTunnelGUI_autogen/timestamp	2339b25892a0922a
+4	26	1691854841087458535	WindTunnelGUI_autogen/mocs_compilation.cpp	2339b25892a0922a
+1273	3265	1691851815854739063	CMakeFiles/WindTunnelGUI.dir/main.cpp.o	6871251d837519ad
+4	26	1691854841087458535	/home/james/Documents/windTunnelV2/build-WindTunnelGUI-Desktop_Qt_6_5_1_GCC_64bit-Debug/WindTunnelGUI_autogen/timestamp	2339b25892a0922a
+4	26	1691854841087458535	/home/james/Documents/windTunnelV2/build-WindTunnelGUI-Desktop_Qt_6_5_1_GCC_64bit-Debug/WindTunnelGUI_autogen/mocs_compilation.cpp	2339b25892a0922a
+1275	15881	1691851828450536193	CMakeFiles/WindTunnelGUI.dir/qcustomplot.cpp.o	58ede7d2738ae386
+28	2438	1691854843499417442	CMakeFiles/WindTunnelGUI.dir/mainwindow.cpp.o	5118141246a1a3d4
+1273	9794	1691851822374634053	CMakeFiles/WindTunnelGUI.dir/WindTunnelGUI_autogen/mocs_compilation.cpp.o	dfd2509f8eff17f5
+28	2957	1691854844019408583	CMakeFiles/WindTunnelGUI.dir/settingsdialog.cpp.o	5ebd05d7fdc91a14
+28	5810	1691854846871359995	CMakeFiles/WindTunnelGUI.dir/airfoildialog.cpp.o	ff7aeab15a0df56b
+3	1278	1691855542111549832	WindTunnelGUI_autogen/timestamp	2339b25892a0922a
+3	1278	1691855542111549832	WindTunnelGUI_autogen/mocs_compilation.cpp	2339b25892a0922a
+3	1278	1691855542111549832	/home/james/Documents/windTunnelV2/build-WindTunnelGUI-Desktop_Qt_6_5_1_GCC_64bit-Debug/WindTunnelGUI_autogen/timestamp	2339b25892a0922a
+3	1278	1691855542111549832	/home/james/Documents/windTunnelV2/build-WindTunnelGUI-Desktop_Qt_6_5_1_GCC_64bit-Debug/WindTunnelGUI_autogen/mocs_compilation.cpp	2339b25892a0922a
+1279	3419	1691855544259515235	CMakeFiles/WindTunnelGUI.dir/main.cpp.o	92e06b55dbf43da0
+1279	3735	1691855544575510146	CMakeFiles/WindTunnelGUI.dir/mainwindow.cpp.o	4810636026978c5d
+1280	4234	1691855545071502157	CMakeFiles/WindTunnelGUI.dir/settingsdialog.cpp.o	2ad8cea5ff7bf082
+1279	8075	1691855548915440244	CMakeFiles/WindTunnelGUI.dir/airfoildialog.cpp.o	5062077e8550d2a2
+1279	11421	1691855552251386513	CMakeFiles/WindTunnelGUI.dir/WindTunnelGUI_autogen/mocs_compilation.cpp.o	65fa5a270a763e45
+1280	17489	1691855558311288908	CMakeFiles/WindTunnelGUI.dir/qcustomplot.cpp.o	1bef536c75c69f80
+17489	18174	1691855559007277699	WindTunnelGUI	91b43a6c14226190
