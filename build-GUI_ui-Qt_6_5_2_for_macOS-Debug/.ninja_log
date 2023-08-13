@@ -1,9 +1,0 @@
-# ninja log v5
-0	426	1690840832416243270	GUI_ui_autogen/timestamp	52d38d7116769784
-0	426	1690840832416243270	GUI_ui_autogen/mocs_compilation.cpp	52d38d7116769784
-0	426	1690840832416243270	/Users/james/Documents/windTunnelV2/build-GUI_ui-Qt_6_5_2_for_macOS-Debug/GUI_ui_autogen/timestamp	52d38d7116769784
-0	426	1690840832416243270	/Users/james/Documents/windTunnelV2/build-GUI_ui-Qt_6_5_2_for_macOS-Debug/GUI_ui_autogen/mocs_compilation.cpp	52d38d7116769784
-426	989	1690840832983166437	CMakeFiles/GUI_ui.dir/GUI_ui_autogen/mocs_compilation.cpp.o	f82c43935c541180
-426	993	1690840832986981894	CMakeFiles/GUI_ui.dir/main.cpp.o	83b0e6cd4e4d01ef
-427	1050	1690840833044202461	CMakeFiles/GUI_ui.dir/mainwindow.cpp.o	7d99d169ba9dd202
-1050	1194	1690840833190130085	GUI_ui.app/Contents/MacOS/GUI_ui	5a8a65b1ef81ee55

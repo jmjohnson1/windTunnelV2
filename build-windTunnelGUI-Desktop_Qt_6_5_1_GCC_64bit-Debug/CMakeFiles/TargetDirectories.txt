@@ -1,9 +1,0 @@
-/home/james/Documents/windTunnelV2/build-windTunnelGUI-Desktop_Qt_6_5_1_GCC_64bit-Debug/CMakeFiles/windTunnelGUI.dir
-/home/james/Documents/windTunnelV2/build-windTunnelGUI-Desktop_Qt_6_5_1_GCC_64bit-Debug/CMakeFiles/edit_cache.dir
-/home/james/Documents/windTunnelV2/build-windTunnelGUI-Desktop_Qt_6_5_1_GCC_64bit-Debug/CMakeFiles/rebuild_cache.dir
-/home/james/Documents/windTunnelV2/build-windTunnelGUI-Desktop_Qt_6_5_1_GCC_64bit-Debug/CMakeFiles/list_install_components.dir
-/home/james/Documents/windTunnelV2/build-windTunnelGUI-Desktop_Qt_6_5_1_GCC_64bit-Debug/CMakeFiles/install.dir
-/home/james/Documents/windTunnelV2/build-windTunnelGUI-Desktop_Qt_6_5_1_GCC_64bit-Debug/CMakeFiles/install/local.dir
-/home/james/Documents/windTunnelV2/build-windTunnelGUI-Desktop_Qt_6_5_1_GCC_64bit-Debug/CMakeFiles/install/strip.dir
-/home/james/Documents/windTunnelV2/build-windTunnelGUI-Desktop_Qt_6_5_1_GCC_64bit-Debug/CMakeFiles/windTunnelGUI_autogen_timestamp_deps.dir
-/home/james/Documents/windTunnelV2/build-windTunnelGUI-Desktop_Qt_6_5_1_GCC_64bit-Debug/CMakeFiles/windTunnelGUI_autogen.dir
