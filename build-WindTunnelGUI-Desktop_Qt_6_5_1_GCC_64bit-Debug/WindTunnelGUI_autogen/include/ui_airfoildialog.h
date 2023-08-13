@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QGridLayout>
 #include "../../../WindTunnelGUI/qcustomplot.h"
 
 QT_BEGIN_NAMESPACE
@@ -19,16 +20,21 @@ QT_BEGIN_NAMESPACE
 class Ui_AirfoilDialog
 {
 public:
-    QCustomPlot *widget;
+    QGridLayout *gridLayout;
+    QCustomPlot *AirfoilDataPlot;
 
     void setupUi(QDialog *AirfoilDialog)
     {
         if (AirfoilDialog->objectName().isEmpty())
             AirfoilDialog->setObjectName("AirfoilDialog");
         AirfoilDialog->resize(522, 420);
-        widget = new QCustomPlot(AirfoilDialog);
-        widget->setObjectName("widget");
-        widget->setGeometry(QRect(70, 60, 381, 301));
+        gridLayout = new QGridLayout(AirfoilDialog);
+        gridLayout->setObjectName("gridLayout");
+        AirfoilDataPlot = new QCustomPlot(AirfoilDialog);
+        AirfoilDataPlot->setObjectName("AirfoilDataPlot");
+
+        gridLayout->addWidget(AirfoilDataPlot, 0, 0, 1, 1);
+
 
         retranslateUi(AirfoilDialog);
 

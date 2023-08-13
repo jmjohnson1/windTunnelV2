@@ -18,6 +18,7 @@ public:
 
 private:
     Ui::AirfoilDialog *ui;
+    void SetupPlot();
 };
 
 #endif // AIRFOILDIALOG_H

@@ -13,7 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),
     m_settings(new SettingsDialog(this)),
     m_timer(new QTimer(this)),
-    m_serial(new QSerialPort(this))
+    m_serial(new QSerialPort(this)),
+    m_airfoil(new AirfoilDialog(this))
 {
     ui->setupUi(this);
 
@@ -27,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->autoSpeedSlider, &QSlider::valueChanged, this, &MainWindow::updateFanAutoSliderReadout);
     connect(ui->autoSpeedSetButton, &QPushButton::clicked, this, &MainWindow::autoSpeedSet);
     connect(ui->manualFanSetButton, &QPushButton::clicked, this, &MainWindow::manualPowerSet);
+    connect(ui->button_OpenAirfoilDialog, &QPushButton::clicked, m_airfoil, &AirfoilDialog::show);
 
     initActionsConnections();
 }

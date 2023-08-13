@@ -7,6 +7,8 @@
 *****************************************************************************/
 
 #include "../../../WindTunnelGUI/mainwindow.h"
+#include <QtGui/qtextcursor.h>
+#include <QScreen>
 #include <QtCore/qmetatype.h>
 
 #if __has_include(<QtCore/qtmochelpers.h>)

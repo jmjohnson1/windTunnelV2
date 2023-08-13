@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QSerialPort>
+#include "airfoildialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -46,5 +47,6 @@ private:
     qint64 m_bytesToWrite = 0;
     QTimer *m_timer = nullptr;
     QSerialPort *m_serial = nullptr;
+    AirfoilDialog *m_airfoil = nullptr;
 };
 #endif // MAINWINDOW_H

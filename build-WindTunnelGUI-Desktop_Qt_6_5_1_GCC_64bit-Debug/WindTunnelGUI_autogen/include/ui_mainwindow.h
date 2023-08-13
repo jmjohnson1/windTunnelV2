@@ -34,22 +34,30 @@ public:
     QAction *actionConfigure;
     QAction *actionConnect;
     QWidget *centralwidget;
+    QGridLayout *gridLayout_7;
+    QGroupBox *groupBox_3;
+    QGridLayout *gridLayout_6;
+    QPushButton *button_OpenAirfoilDialog;
+    QPushButton *button_OpenCylinderDialog;
+    QSpacerItem *horizontalSpacer_6;
+    QSpacerItem *horizontalSpacer_5;
+    QSpacerItem *horizontalSpacer_7;
     QGroupBox *testSectionSpeedGroup;
     QGridLayout *gridLayout_3;
     QGroupBox *manualFanControlGroup;
     QGridLayout *gridLayout;
-    QSlider *fan1ManualSlider;
-    QSpacerItem *horizontalSpacer_4;
-    QLabel *fan1ManualSliderReadout;
-    QPushButton *manualFanSetButton;
     QSpacerItem *horizontalSpacer_3;
+    QPushButton *manualFanSetButton;
+    QSpacerItem *horizontalSpacer_4;
+    QSlider *fan1ManualSlider;
+    QLabel *fan1ManualSliderReadout;
     QGroupBox *autoSpeedControlGroup;
     QGridLayout *gridLayout_2;
-    QPushButton *autoSpeedSetButton;
-    QLabel *autoSpeedSliderReadout;
     QSpacerItem *horizontalSpacer;
-    QSlider *autoSpeedSlider;
     QSpacerItem *horizontalSpacer_2;
+    QPushButton *autoSpeedSetButton;
+    QSlider *autoSpeedSlider;
+    QLabel *autoSpeedSliderReadout;
     QGroupBox *groupBox;
     QGridLayout *gridLayout_4;
     QGroupBox *groupBox_2;
@@ -79,9 +87,44 @@ public:
         actionConnect->setObjectName("actionConnect");
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
+        gridLayout_7 = new QGridLayout(centralwidget);
+        gridLayout_7->setObjectName("gridLayout_7");
+        groupBox_3 = new QGroupBox(centralwidget);
+        groupBox_3->setObjectName("groupBox_3");
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(groupBox_3->sizePolicy().hasHeightForWidth());
+        groupBox_3->setSizePolicy(sizePolicy);
+        gridLayout_6 = new QGridLayout(groupBox_3);
+        gridLayout_6->setObjectName("gridLayout_6");
+        button_OpenAirfoilDialog = new QPushButton(groupBox_3);
+        button_OpenAirfoilDialog->setObjectName("button_OpenAirfoilDialog");
+
+        gridLayout_6->addWidget(button_OpenAirfoilDialog, 0, 1, 1, 1);
+
+        button_OpenCylinderDialog = new QPushButton(groupBox_3);
+        button_OpenCylinderDialog->setObjectName("button_OpenCylinderDialog");
+
+        gridLayout_6->addWidget(button_OpenCylinderDialog, 0, 3, 1, 1);
+
+        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_6->addItem(horizontalSpacer_6, 0, 2, 1, 1);
+
+        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_6->addItem(horizontalSpacer_5, 0, 0, 1, 1);
+
+        horizontalSpacer_7 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_6->addItem(horizontalSpacer_7, 0, 4, 1, 1);
+
+
+        gridLayout_7->addWidget(groupBox_3, 1, 0, 1, 2);
+
         testSectionSpeedGroup = new QGroupBox(centralwidget);
         testSectionSpeedGroup->setObjectName("testSectionSpeedGroup");
-        testSectionSpeedGroup->setGeometry(QRect(30, 30, 300, 300));
         gridLayout_3 = new QGridLayout(testSectionSpeedGroup);
         gridLayout_3->setObjectName("gridLayout_3");
         manualFanControlGroup = new QGroupBox(testSectionSpeedGroup);
@@ -90,29 +133,29 @@ public:
         manualFanControlGroup->setChecked(false);
         gridLayout = new QGridLayout(manualFanControlGroup);
         gridLayout->setObjectName("gridLayout");
-        fan1ManualSlider = new QSlider(manualFanControlGroup);
-        fan1ManualSlider->setObjectName("fan1ManualSlider");
-        fan1ManualSlider->setOrientation(Qt::Horizontal);
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout->addWidget(fan1ManualSlider, 0, 0, 1, 2);
-
-        horizontalSpacer_4 = new QSpacerItem(30, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout->addItem(horizontalSpacer_4, 1, 2, 1, 1);
-
-        fan1ManualSliderReadout = new QLabel(manualFanControlGroup);
-        fan1ManualSliderReadout->setObjectName("fan1ManualSliderReadout");
-
-        gridLayout->addWidget(fan1ManualSliderReadout, 0, 2, 1, 1);
+        gridLayout->addItem(horizontalSpacer_3, 1, 0, 1, 1);
 
         manualFanSetButton = new QPushButton(manualFanControlGroup);
         manualFanSetButton->setObjectName("manualFanSetButton");
 
         gridLayout->addWidget(manualFanSetButton, 1, 1, 1, 1);
 
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        horizontalSpacer_4 = new QSpacerItem(30, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout->addItem(horizontalSpacer_3, 1, 0, 1, 1);
+        gridLayout->addItem(horizontalSpacer_4, 1, 2, 1, 1);
+
+        fan1ManualSlider = new QSlider(manualFanControlGroup);
+        fan1ManualSlider->setObjectName("fan1ManualSlider");
+        fan1ManualSlider->setOrientation(Qt::Horizontal);
+
+        gridLayout->addWidget(fan1ManualSlider, 0, 0, 1, 3);
+
+        fan1ManualSliderReadout = new QLabel(manualFanControlGroup);
+        fan1ManualSliderReadout->setObjectName("fan1ManualSliderReadout");
+
+        gridLayout->addWidget(fan1ManualSliderReadout, 0, 3, 1, 1);
 
 
         gridLayout_3->addWidget(manualFanControlGroup, 0, 0, 1, 1);
@@ -121,36 +164,44 @@ public:
         autoSpeedControlGroup->setObjectName("autoSpeedControlGroup");
         gridLayout_2 = new QGridLayout(autoSpeedControlGroup);
         gridLayout_2->setObjectName("gridLayout_2");
-        autoSpeedSetButton = new QPushButton(autoSpeedControlGroup);
-        autoSpeedSetButton->setObjectName("autoSpeedSetButton");
-
-        gridLayout_2->addWidget(autoSpeedSetButton, 1, 1, 1, 1);
-
-        autoSpeedSliderReadout = new QLabel(autoSpeedControlGroup);
-        autoSpeedSliderReadout->setObjectName("autoSpeedSliderReadout");
-
-        gridLayout_2->addWidget(autoSpeedSliderReadout, 0, 2, 1, 1);
-
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         gridLayout_2->addItem(horizontalSpacer, 1, 0, 1, 1);
-
-        autoSpeedSlider = new QSlider(autoSpeedControlGroup);
-        autoSpeedSlider->setObjectName("autoSpeedSlider");
-        autoSpeedSlider->setOrientation(Qt::Horizontal);
-
-        gridLayout_2->addWidget(autoSpeedSlider, 0, 0, 1, 2);
 
         horizontalSpacer_2 = new QSpacerItem(30, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         gridLayout_2->addItem(horizontalSpacer_2, 1, 2, 1, 1);
 
+        autoSpeedSetButton = new QPushButton(autoSpeedControlGroup);
+        autoSpeedSetButton->setObjectName("autoSpeedSetButton");
+
+        gridLayout_2->addWidget(autoSpeedSetButton, 1, 1, 1, 1);
+
+        autoSpeedSlider = new QSlider(autoSpeedControlGroup);
+        autoSpeedSlider->setObjectName("autoSpeedSlider");
+        autoSpeedSlider->setOrientation(Qt::Horizontal);
+
+        gridLayout_2->addWidget(autoSpeedSlider, 0, 0, 1, 3);
+
+        autoSpeedSliderReadout = new QLabel(autoSpeedControlGroup);
+        autoSpeedSliderReadout->setObjectName("autoSpeedSliderReadout");
+
+        gridLayout_2->addWidget(autoSpeedSliderReadout, 0, 3, 1, 1);
+
 
         gridLayout_3->addWidget(autoSpeedControlGroup, 1, 0, 1, 1);
 
+
+        gridLayout_7->addWidget(testSectionSpeedGroup, 0, 0, 1, 1);
+
         groupBox = new QGroupBox(centralwidget);
         groupBox->setObjectName("groupBox");
-        groupBox->setGeometry(QRect(380, 30, 300, 300));
+        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
+        groupBox->setSizePolicy(sizePolicy1);
+        groupBox->setMinimumSize(QSize(300, 0));
         gridLayout_4 = new QGridLayout(groupBox);
         gridLayout_4->setObjectName("gridLayout_4");
         groupBox_2 = new QGroupBox(groupBox);
@@ -200,6 +251,9 @@ public:
 
         gridLayout_4->addWidget(groupBox_2, 0, 0, 1, 1);
 
+
+        gridLayout_7->addWidget(groupBox, 0, 1, 1, 1);
+
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -227,10 +281,13 @@ public:
         actionDisconnect->setText(QCoreApplication::translate("MainWindow", "Disconnect", nullptr));
         actionConfigure->setText(QCoreApplication::translate("MainWindow", "Configure", nullptr));
         actionConnect->setText(QCoreApplication::translate("MainWindow", "Connect", nullptr));
+        groupBox_3->setTitle(QCoreApplication::translate("MainWindow", "Test Routines", nullptr));
+        button_OpenAirfoilDialog->setText(QCoreApplication::translate("MainWindow", "Airfoil", nullptr));
+        button_OpenCylinderDialog->setText(QCoreApplication::translate("MainWindow", "Cylinder", nullptr));
         testSectionSpeedGroup->setTitle(QCoreApplication::translate("MainWindow", "Test Section Speed", nullptr));
         manualFanControlGroup->setTitle(QCoreApplication::translate("MainWindow", "Manual Fan Control", nullptr));
-        fan1ManualSliderReadout->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         manualFanSetButton->setText(QCoreApplication::translate("MainWindow", "Set", nullptr));
+        fan1ManualSliderReadout->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         autoSpeedControlGroup->setTitle(QCoreApplication::translate("MainWindow", "Speed Selection", nullptr));
         autoSpeedSetButton->setText(QCoreApplication::translate("MainWindow", "Set", nullptr));
         autoSpeedSliderReadout->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
