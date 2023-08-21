@@ -15,7 +15,12 @@ public:
     explicit MessageHandler(QObject *parent = nullptr);
 
 signals:
-    void airspeedMessageReady() // FIXME: Needs an argument
+    // TO IMPLEMENT
+
+private:
+    void handleMessage(QByteArray msg);
+    void parseAirspeedMessage(QByteArray *msg);
+    void parsePressureTapMessage(QByteArray *msg);
 
 };
 
