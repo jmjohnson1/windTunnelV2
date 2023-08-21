@@ -5,6 +5,7 @@
 #include <QTimer>
 #include <QMessageBox>
 #include <chrono>
+#include <QDebug>
 
 static constexpr std::chrono::seconds kWriteTimeout = std::chrono::seconds{5};
 
@@ -29,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->autoSpeedSetButton, &QPushButton::clicked, this, &MainWindow::autoSpeedSet);
     connect(ui->manualFanSetButton, &QPushButton::clicked, this, &MainWindow::manualPowerSet);
     connect(ui->button_OpenAirfoilDialog, &QPushButton::clicked, m_airfoil, &AirfoilDialog::show);
+    connect(m_serial, &QSerialPort::readyRead, this, &MainWindow::readData);
 
     initActionsConnections();
 }
@@ -81,7 +83,17 @@ void MainWindow::writeData(const QByteArray &data) {
 }
 
 void MainWindow::readData() {
-    const QByteArray data = m_serial->readAll(); //UNUSED
+    QByteArray data = m_serial->read(1);
+    qDebug() << "Data: " << data;
+    if (!strcmp(data, "<")) {
+        storeMessage = true;
+    } else if (!strcmp(data, ">")) {
+        storeMessage = false;
+        qDebug() << "Message: " << messageReceived;
+        messageReceived.clear();
+    } else if (storeMessage) {
+        messageReceived.append(data);
+    }
 }
 
 void MainWindow::handleError(QSerialPort::SerialPortError error) {

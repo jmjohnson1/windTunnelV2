@@ -393,6 +393,12 @@
 			null
 		],
 		[
+			"/home/james/Documents/windTunnelV2/WindTunnelGUI/messagehandler.h",
+			"MU",
+			"EWIEGA46WW/moc_messagehandler.cpp",
+			null
+		],
+		[
 			"/home/james/Documents/windTunnelV2/WindTunnelGUI/qcustomplot.h",
 			"MU",
 			"EWIEGA46WW/moc_qcustomplot.cpp",
@@ -483,6 +489,11 @@
 		],
 		[
 			"/home/james/Documents/windTunnelV2/WindTunnelGUI/mainwindow.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/james/Documents/windTunnelV2/WindTunnelGUI/messagehandler.cpp",
 			"MU",
 			null
 		],

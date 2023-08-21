@@ -97,6 +97,14 @@ build CMakeFiles/WindTunnelGUI.dir/qcustomplot.cpp.o: CXX_COMPILER__WindTunnelGU
   OBJECT_DIR = CMakeFiles/WindTunnelGUI.dir
   OBJECT_FILE_DIR = CMakeFiles/WindTunnelGUI.dir
 
+build CMakeFiles/WindTunnelGUI.dir/messagehandler.cpp.o: CXX_COMPILER__WindTunnelGUI_Debug /home/james/Documents/windTunnelV2/WindTunnelGUI/messagehandler.cpp || cmake_object_order_depends_target_WindTunnelGUI
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_PRINTSUPPORT_LIB -DQT_SERIALPORT_LIB -DQT_WIDGETS_LIB
+  DEP_FILE = CMakeFiles/WindTunnelGUI.dir/messagehandler.cpp.o.d
+  FLAGS = -DQT_QML_DEBUG -g -fPIC -std=gnu++17
+  INCLUDES = -I/home/james/Documents/windTunnelV2/build-WindTunnelGUI-Desktop_Qt_6_5_1_GCC_64bit-Debug/WindTunnelGUI_autogen/include -isystem /home/james/Qt/6.5.1/gcc_64/include/QtCore -isystem /home/james/Qt/6.5.1/gcc_64/include -isystem /home/james/Qt/6.5.1/gcc_64/mkspecs/linux-g++ -isystem /home/james/Qt/6.5.1/gcc_64/include/QtWidgets -isystem /home/james/Qt/6.5.1/gcc_64/include/QtGui -isystem /home/james/Qt/6.5.1/gcc_64/include/QtPrintSupport -isystem /home/james/Qt/6.5.1/gcc_64/include/QtSerialPort
+  OBJECT_DIR = CMakeFiles/WindTunnelGUI.dir
+  OBJECT_FILE_DIR = CMakeFiles/WindTunnelGUI.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target WindTunnelGUI
@@ -105,7 +113,7 @@ build CMakeFiles/WindTunnelGUI.dir/qcustomplot.cpp.o: CXX_COMPILER__WindTunnelGU
 #############################################
 # Link the executable WindTunnelGUI
 
-build WindTunnelGUI: CXX_EXECUTABLE_LINKER__WindTunnelGUI_Debug CMakeFiles/WindTunnelGUI.dir/WindTunnelGUI_autogen/mocs_compilation.cpp.o CMakeFiles/WindTunnelGUI.dir/main.cpp.o CMakeFiles/WindTunnelGUI.dir/mainwindow.cpp.o CMakeFiles/WindTunnelGUI.dir/airfoildialog.cpp.o CMakeFiles/WindTunnelGUI.dir/settingsdialog.cpp.o CMakeFiles/WindTunnelGUI.dir/qcustomplot.cpp.o | /home/james/Qt/6.5.1/gcc_64/lib/libQt6PrintSupport.so.6.5.1 /home/james/Qt/6.5.1/gcc_64/lib/libQt6Widgets.so.6.5.1 /home/james/Qt/6.5.1/gcc_64/lib/libQt6Gui.so.6.5.1 /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libOpenGL.so /home/james/Qt/6.5.1/gcc_64/lib/libQt6SerialPort.so.6.5.1 /home/james/Qt/6.5.1/gcc_64/lib/libQt6Core.so.6.5.1 || WindTunnelGUI_autogen WindTunnelGUI_autogen_timestamp_deps
+build WindTunnelGUI: CXX_EXECUTABLE_LINKER__WindTunnelGUI_Debug CMakeFiles/WindTunnelGUI.dir/WindTunnelGUI_autogen/mocs_compilation.cpp.o CMakeFiles/WindTunnelGUI.dir/main.cpp.o CMakeFiles/WindTunnelGUI.dir/mainwindow.cpp.o CMakeFiles/WindTunnelGUI.dir/airfoildialog.cpp.o CMakeFiles/WindTunnelGUI.dir/settingsdialog.cpp.o CMakeFiles/WindTunnelGUI.dir/qcustomplot.cpp.o CMakeFiles/WindTunnelGUI.dir/messagehandler.cpp.o | /home/james/Qt/6.5.1/gcc_64/lib/libQt6PrintSupport.so.6.5.1 /home/james/Qt/6.5.1/gcc_64/lib/libQt6Widgets.so.6.5.1 /home/james/Qt/6.5.1/gcc_64/lib/libQt6Gui.so.6.5.1 /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libOpenGL.so /home/james/Qt/6.5.1/gcc_64/lib/libQt6SerialPort.so.6.5.1 /home/james/Qt/6.5.1/gcc_64/lib/libQt6Core.so.6.5.1 || WindTunnelGUI_autogen WindTunnelGUI_autogen_timestamp_deps
   FLAGS = -DQT_QML_DEBUG -g
   LINK_LIBRARIES = -Wl,-rpath,/home/james/Qt/6.5.1/gcc_64/lib:  /home/james/Qt/6.5.1/gcc_64/lib/libQt6PrintSupport.so.6.5.1  /home/james/Qt/6.5.1/gcc_64/lib/libQt6Widgets.so.6.5.1  /home/james/Qt/6.5.1/gcc_64/lib/libQt6Gui.so.6.5.1  /usr/lib/x86_64-linux-gnu/libGLX.so  /usr/lib/x86_64-linux-gnu/libOpenGL.so  /home/james/Qt/6.5.1/gcc_64/lib/libQt6SerialPort.so.6.5.1  /home/james/Qt/6.5.1/gcc_64/lib/libQt6Core.so.6.5.1
   OBJECT_DIR = CMakeFiles/WindTunnelGUI.dir
@@ -206,7 +214,7 @@ build WindTunnelGUI_autogen/timestamp WindTunnelGUI_autogen/mocs_compilation.cpp
 #############################################
 # Phony custom command for CMakeFiles/WindTunnelGUI_autogen_timestamp_deps
 
-build CMakeFiles/WindTunnelGUI_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/WindTunnelGUI_autogen_timestamp_deps: phony /home/james/Qt/6.5.1/gcc_64/lib/libQt6Core.so.6.5.1 /home/james/Qt/6.5.1/gcc_64/lib/libQt6PrintSupport.so.6.5.1 /home/james/Qt/6.5.1/gcc_64/./libexec/moc /home/james/Qt/6.5.1/gcc_64/./libexec/uic /home/james/Qt/6.5.1/gcc_64/lib/libQt6Widgets.so.6.5.1
+build CMakeFiles/WindTunnelGUI_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/WindTunnelGUI_autogen_timestamp_deps: phony /home/james/Qt/6.5.1/gcc_64/lib/libQt6PrintSupport.so.6.5.1 /home/james/Qt/6.5.1/gcc_64/lib/libQt6Core.so.6.5.1 /home/james/Qt/6.5.1/gcc_64/./libexec/moc /home/james/Qt/6.5.1/gcc_64/lib/libQt6Widgets.so.6.5.1 /home/james/Qt/6.5.1/gcc_64/./libexec/uic
 
 
 #############################################

@@ -28,6 +28,7 @@ private slots:
     void autoSpeedSet();
     void writeData(const QByteArray &data);
     void readData();
+    void parseMessage(QByteArray msg);
 
     void handleError(QSerialPort::SerialPortError error);
     void handleBytesWritten(qint64 bytes);
@@ -48,5 +49,7 @@ private:
     QTimer *m_timer = nullptr;
     QSerialPort *m_serial = nullptr;
     AirfoilDialog *m_airfoil = nullptr;
+    QByteArray messageReceived;
+    bool storeMessage = false;
 };
 #endif // MAINWINDOW_H
