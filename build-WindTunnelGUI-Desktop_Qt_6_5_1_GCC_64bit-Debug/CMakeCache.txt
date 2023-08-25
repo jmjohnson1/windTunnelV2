@@ -35,13 +35,13 @@ CMAKE_CXX_COMPILER_AR:FILEPATH=/usr/bin/gcc-ar-11
 CMAKE_CXX_COMPILER_RANLIB:FILEPATH=/usr/bin/gcc-ranlib-11
 
 //Flags used by the CXX compiler during all build types.
-CMAKE_CXX_FLAGS:STRING=-DQT_QML_DEBUG
+CMAKE_CXX_FLAGS:STRING=
 
 //Flags used by the CXX compiler during DEBUG builds.
 CMAKE_CXX_FLAGS_DEBUG:STRING=-g
 
 //No help, variable specified on the command line.
-CMAKE_CXX_FLAGS_INIT:STRING=-DQT_QML_DEBUG
+CMAKE_CXX_FLAGS_INIT:STRING=
 
 //Flags used by the CXX compiler during MINSIZEREL builds.
 CMAKE_CXX_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG
@@ -137,7 +137,7 @@ CMAKE_INSTALL_SYSCONFDIR:PATH=etc
 CMAKE_LINKER:FILEPATH=/usr/bin/ld
 
 //Program used to build from build.ninja files.
-CMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/ninja
+CMAKE_MAKE_PROGRAM:FILEPATH=/home/james/Qt/Tools/Ninja/ninja
 
 //Flags used by the linker during the creation of modules during
 // all build types.
@@ -324,11 +324,8 @@ Qt6GuiTools_DIR:PATH=/home/james/Qt/6.5.1/gcc_64/lib/cmake/Qt6GuiTools
 //The directory containing a CMake configuration file for Qt6Gui.
 Qt6Gui_DIR:PATH=/home/james/Qt/6.5.1/gcc_64/lib/cmake/Qt6Gui
 
-//The directory containing a CMake configuration file for Qt6PrintSupport.
-Qt6PrintSupport_DIR:PATH=/home/james/Qt/6.5.1/gcc_64/lib/cmake/Qt6PrintSupport
-
 //The directory containing a CMake configuration file for Qt6SerialPort.
-Qt6SerialPort_DIR:PATH=/home/james/Qt/6.5.1/gcc_64/lib/cmake/Qt6SerialPort
+Qt6SerialPort_DIR:PATH=Qt6SerialPort_DIR-NOTFOUND
 
 //The directory containing a CMake configuration file for Qt6WidgetsTools.
 Qt6WidgetsTools_DIR:PATH=/home/james/Qt/6.5.1/gcc_64/lib/cmake/Qt6WidgetsTools
@@ -700,12 +697,6 @@ QT_FEATURE_cross_compile:INTERNAL=OFF
 QT_FEATURE_cssparser:INTERNAL=ON
 //Qt feature: ctf (from target Qt6::Core)
 QT_FEATURE_ctf:INTERNAL=OFF
-//Qt feature: cups (from target Qt6::PrintSupport)
-QT_FEATURE_cups:INTERNAL=ON
-//Qt feature: cupsjobwidget (from target Qt6::PrintSupport)
-QT_FEATURE_cupsjobwidget:INTERNAL=ON
-//Qt feature: cupspassworddialog (from target Qt6::PrintSupport)
-QT_FEATURE_cupspassworddialog:INTERNAL=ON
 //Qt feature: cursor (from target Qt6::Gui)
 QT_FEATURE_cursor:INTERNAL=ON
 //Qt feature: cxx11 (from target Qt6::Core)
@@ -996,8 +987,6 @@ QT_FEATURE_network:INTERNAL=ON
 QT_FEATURE_no_direct_extern_access:INTERNAL=OFF
 //Qt feature: no_prefix (from target Qt6::Core)
 QT_FEATURE_no_prefix:INTERNAL=OFF
-//Qt feature: ntddmodm (from target Qt6::SerialPort)
-QT_FEATURE_ntddmodm:INTERNAL=OFF
 //Qt feature: opengl (from target Qt6::Gui)
 QT_FEATURE_opengl:INTERNAL=ON
 //Qt feature: opengles2 (from target Qt6::Gui)
@@ -1046,14 +1035,6 @@ QT_FEATURE_poll_select:INTERNAL=OFF
 QT_FEATURE_posix_fallocate:INTERNAL=ON
 //Qt feature: precompile_header (from target Qt6::Core)
 QT_FEATURE_precompile_header:INTERNAL=ON
-//Qt feature: printdialog (from target Qt6::PrintSupport)
-QT_FEATURE_printdialog:INTERNAL=ON
-//Qt feature: printer (from target Qt6::PrintSupport)
-QT_FEATURE_printer:INTERNAL=ON
-//Qt feature: printpreviewdialog (from target Qt6::PrintSupport)
-QT_FEATURE_printpreviewdialog:INTERNAL=ON
-//Qt feature: printpreviewwidget (from target Qt6::PrintSupport)
-QT_FEATURE_printpreviewwidget:INTERNAL=ON
 //Qt feature: printsupport (from target Qt6::Core)
 QT_FEATURE_printsupport:INTERNAL=ON
 //Qt feature: private_tests (from target Qt6::Core)
