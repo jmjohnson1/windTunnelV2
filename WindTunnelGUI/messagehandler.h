@@ -19,7 +19,6 @@ public:
     explicit MessageHandler(QObject *parent = nullptr);
 
 signals:
-    // TO IMPLEMENT
     void airspeedReady(QList<float> data);
     void pressureTapReady(QList<float> data);
 

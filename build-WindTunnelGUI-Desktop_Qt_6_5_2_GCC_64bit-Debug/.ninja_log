@@ -20,3 +20,13 @@
 504	6209	1692927923732141437	CMakeFiles/WindTunnelGUI.dir/airfoildialog.cpp.o	9351ac66c4d4920b
 504	8925	1692927926444189527	CMakeFiles/WindTunnelGUI.dir/WindTunnelGUI_autogen/mocs_compilation.cpp.o	6f3bf42cd7f7bf47
 8926	9541	1692927927060200451	WindTunnelGUI	53a85c2b2da6c24
+2	158	1693273029482437618	WindTunnelGUI_autogen/timestamp	2f90f5eac52e9899
+2	158	1693273029482437618	WindTunnelGUI_autogen/mocs_compilation.cpp	2f90f5eac52e9899
+2	158	1693273029482437618	/home/james/Documents/windTunnelV2/build-WindTunnelGUI-Desktop_Qt_6_5_2_GCC_64bit-Debug/WindTunnelGUI_autogen/timestamp	2f90f5eac52e9899
+2	158	1693273029482437618	/home/james/Documents/windTunnelV2/build-WindTunnelGUI-Desktop_Qt_6_5_2_GCC_64bit-Debug/WindTunnelGUI_autogen/mocs_compilation.cpp	2f90f5eac52e9899
+158	1173	1693273030502484836	CMakeFiles/WindTunnelGUI.dir/messagehandler.cpp.o	7f0d6839c9dc3da1
+158	1727	1693273031054510390	CMakeFiles/WindTunnelGUI.dir/settingsdialog.cpp.o	ab926cef94ae298f
+158	4138	1693273033466622048	CMakeFiles/WindTunnelGUI.dir/airfoildialog.cpp.o	9351ac66c4d4920b
+158	4210	1693273033538625383	CMakeFiles/WindTunnelGUI.dir/mainwindow.cpp.o	bfab41e097b0bccb
+158	7157	1693273036478761484	CMakeFiles/WindTunnelGUI.dir/WindTunnelGUI_autogen/mocs_compilation.cpp.o	6f3bf42cd7f7bf47
+7157	7730	1693273037054788148	WindTunnelGUI	53a85c2b2da6c24

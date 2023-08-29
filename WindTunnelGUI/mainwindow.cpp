@@ -15,7 +15,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_settings(new SettingsDialog(this)),
     m_timer(new QTimer(this)),
     m_serial(new QSerialPort(this)),
-    m_airfoil(new AirfoilDialog(this))
+    m_airfoil(new AirfoilDialog(this)),
+    m_messageHandler(new MessageHandler(this))
 {
     ui->setupUi(this);
 
@@ -90,6 +91,7 @@ void MainWindow::readData() {
     } else if (!strcmp(data, ">")) {
         storeMessage = false;
         qDebug() << "Message: " << messageReceived;
+        m_messageHandler->handleMessage(messageReceived);
         messageReceived.clear();
     } else if (storeMessage) {
         messageReceived.append(data);
