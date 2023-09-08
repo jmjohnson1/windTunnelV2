@@ -32,6 +32,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->manualFanSetButton, &QPushButton::clicked, this, &MainWindow::manualPowerSet);
     connect(ui->button_OpenAirfoilDialog, &QPushButton::clicked, m_airfoil, &AirfoilDialog::show);
     connect(m_serial, &QSerialPort::readyRead, this, &MainWindow::readData);
+<<<<<<< HEAD
+=======
+    connect(m_messageHandler, &MessageHandler::airspeedReady, this, &MainWindow::updateAirpseed);
+    connect(m_messageHandler, &MessageHandler::pressureTapReady, m_airfoil, &AirfoilDialog::plotPressureData);
+>>>>>>> 49a8859b5d867deba7632fdd36d6476462720c1d
 
     initActionsConnections();
 }
@@ -142,7 +147,7 @@ void MainWindow::autoSpeedSet()
 {
     ui->speedSetpointLCD->display(ui->autoSpeedSlider->value());
 
-    QByteArray command("!SETSPEED");
+    QByteArray command("!SETSPEED ");
     command.append(QByteArray::number(ui->autoSpeedSlider->value()));
     qDebug() << command;
 }
@@ -159,7 +164,13 @@ void MainWindow::showWriteError(const QString &message)
 
 void MainWindow::manualPowerSet()
 {
-    QByteArray command("!SETPOWER");
+    QByteArray command("!SETPOWER ");
     command.append(QByteArray::number(ui->fan1ManualSlider->value()));
     qDebug() << command;
+}
+
+void MainWindow::updateAirpseed(QList<float> data) {
+    ui->speedLCD->display(data[0]);
+    ui->staticPressureLCD->display(data[1]);
+    ui->totalPressureLCD->display(data[2]);
 }

@@ -16,6 +16,9 @@ public:
     explicit AirfoilDialog(QWidget *parent = nullptr);
     ~AirfoilDialog();
 
+public slots:
+    void plotPressureData(QList<double> data);
+
 private:
     Ui::AirfoilDialog *ui;
     void SetupPlot();
