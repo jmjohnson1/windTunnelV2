@@ -44,17 +44,19 @@ static constexpr auto qt_meta_stringdata_CLASSMessageHandlerENDCLASS = QtMocHelp
     "",
     "QList<float>",
     "data",
-    "pressureTapReady"
+    "pressureTapReady",
+    "QList<double>"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSMessageHandlerENDCLASS_t {
-    uint offsetsAndSizes[12];
+    uint offsetsAndSizes[14];
     char stringdata0[15];
     char stringdata1[14];
     char stringdata2[1];
     char stringdata3[13];
     char stringdata4[5];
     char stringdata5[17];
+    char stringdata6[14];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSMessageHandlerENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -65,14 +67,16 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSMessageHandlerENDCLASS_t qt_met
         QT_MOC_LITERAL(29, 0),  // ""
         QT_MOC_LITERAL(30, 12),  // "QList<float>"
         QT_MOC_LITERAL(43, 4),  // "data"
-        QT_MOC_LITERAL(48, 16)   // "pressureTapReady"
+        QT_MOC_LITERAL(48, 16),  // "pressureTapReady"
+        QT_MOC_LITERAL(65, 13)   // "QList<double>"
     },
     "MessageHandler",
     "airspeedReady",
     "",
     "QList<float>",
     "data",
-    "pressureTapReady"
+    "pressureTapReady",
+    "QList<double>"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -97,7 +101,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMessageHandlerENDCLASS[] = {
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
-    QMetaType::Void, 0x80000000 | 3,    4,
+    QMetaType::Void, 0x80000000 | 6,    4,
 
        0        // eod
 };
@@ -116,7 +120,7 @@ Q_CONSTINIT const QMetaObject MessageHandler::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<QList<float>, std::false_type>,
         // method 'pressureTapReady'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<QList<float>, std::false_type>
+        QtPrivate::TypeAndForceComplete<QList<double>, std::false_type>
     >,
     nullptr
 } };
@@ -128,7 +132,7 @@ void MessageHandler::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         (void)_t;
         switch (_id) {
         case 0: _t->airspeedReady((*reinterpret_cast< std::add_pointer_t<QList<float>>>(_a[1]))); break;
-        case 1: _t->pressureTapReady((*reinterpret_cast< std::add_pointer_t<QList<float>>>(_a[1]))); break;
+        case 1: _t->pressureTapReady((*reinterpret_cast< std::add_pointer_t<QList<double>>>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -145,7 +149,7 @@ void MessageHandler::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
             case 0:
-                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QList<float> >(); break;
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QList<double> >(); break;
             }
             break;
         }
@@ -159,7 +163,7 @@ void MessageHandler::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
             }
         }
         {
-            using _t = void (MessageHandler::*)(QList<float> );
+            using _t = void (MessageHandler::*)(QList<double> );
             if (_t _q_method = &MessageHandler::pressureTapReady; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 1;
                 return;
@@ -206,7 +210,7 @@ void MessageHandler::airspeedReady(QList<float> _t1)
 }
 
 // SIGNAL 1
-void MessageHandler::pressureTapReady(QList<float> _t1)
+void MessageHandler::pressureTapReady(QList<double> _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);

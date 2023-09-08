@@ -53,7 +53,7 @@ void MessageHandler::parsePressureTapMessage(QList<QByteArray> *msgList) {
      * <msgID, tap1, tap2, ..., tap20>
      * Pressure measurements in pascals
     */
-    QList<float> pressureTapData;
+    QList<double> pressureTapData;
     for (int i = 0; i < PRESSURETAP_MSG_LENGTH; ++i) {
         pressureTapData[i] = msgList->at(i+1).toFloat();
     }

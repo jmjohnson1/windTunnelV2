@@ -10,6 +10,7 @@
 #include <QtGui/qtextcursor.h>
 #include <QtGui/qscreen.h>
 #include <QtCore/qmetatype.h>
+#include <QtCore/QList>
 
 #if __has_include(<QtCore/qtmochelpers.h>)
 #include <QtCore/qtmochelpers.h>
@@ -57,11 +58,13 @@ static constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers:
     "handleBytesWritten",
     "bytes",
     "handleWriteTimeout",
-    "manualPowerSet"
+    "manualPowerSet",
+    "updateAirpseed",
+    "QList<float>"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {
-    uint offsetsAndSizes[36];
+    uint offsetsAndSizes[40];
     char stringdata0[11];
     char stringdata1[15];
     char stringdata2[1];
@@ -80,6 +83,8 @@ struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {
     char stringdata15[6];
     char stringdata16[19];
     char stringdata17[15];
+    char stringdata18[15];
+    char stringdata19[13];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSMainWindowENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -102,7 +107,9 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSMainWindowENDCLASS_t qt_meta_st
         QT_MOC_LITERAL(192, 18),  // "handleBytesWritten"
         QT_MOC_LITERAL(211, 5),  // "bytes"
         QT_MOC_LITERAL(217, 18),  // "handleWriteTimeout"
-        QT_MOC_LITERAL(236, 14)   // "manualPowerSet"
+        QT_MOC_LITERAL(236, 14),  // "manualPowerSet"
+        QT_MOC_LITERAL(251, 14),  // "updateAirpseed"
+        QT_MOC_LITERAL(266, 12)   // "QList<float>"
     },
     "MainWindow",
     "openSerialPort",
@@ -121,7 +128,9 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSMainWindowENDCLASS_t qt_meta_st
     "handleBytesWritten",
     "bytes",
     "handleWriteTimeout",
-    "manualPowerSet"
+    "manualPowerSet",
+    "updateAirpseed",
+    "QList<float>"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -133,7 +142,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
       11,       // revision
        0,       // classname
        0,    0, // classinfo
-      11,   14, // methods
+      12,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -141,17 +150,18 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   80,    2, 0x08,    1 /* Private */,
-       3,    0,   81,    2, 0x08,    2 /* Private */,
-       4,    1,   82,    2, 0x08,    3 /* Private */,
-       6,    1,   85,    2, 0x08,    5 /* Private */,
-       7,    0,   88,    2, 0x08,    7 /* Private */,
-       8,    1,   89,    2, 0x08,    8 /* Private */,
-      10,    0,   92,    2, 0x08,   10 /* Private */,
-      11,    1,   93,    2, 0x08,   11 /* Private */,
-      14,    1,   96,    2, 0x08,   13 /* Private */,
-      16,    0,   99,    2, 0x08,   15 /* Private */,
-      17,    0,  100,    2, 0x08,   16 /* Private */,
+       1,    0,   86,    2, 0x08,    1 /* Private */,
+       3,    0,   87,    2, 0x08,    2 /* Private */,
+       4,    1,   88,    2, 0x08,    3 /* Private */,
+       6,    1,   91,    2, 0x08,    5 /* Private */,
+       7,    0,   94,    2, 0x08,    7 /* Private */,
+       8,    1,   95,    2, 0x08,    8 /* Private */,
+      10,    0,   98,    2, 0x08,   10 /* Private */,
+      11,    1,   99,    2, 0x08,   11 /* Private */,
+      14,    1,  102,    2, 0x08,   13 /* Private */,
+      16,    0,  105,    2, 0x08,   15 /* Private */,
+      17,    0,  106,    2, 0x08,   16 /* Private */,
+      18,    1,  107,    2, 0x08,   17 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -165,6 +175,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
     QMetaType::Void, QMetaType::LongLong,   15,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 19,    9,
 
        0        // eod
 };
@@ -204,7 +215,10 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         // method 'handleWriteTimeout'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'manualPowerSet'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'updateAirpseed'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QList<float>, std::false_type>
     >,
     nullptr
 } };
@@ -226,7 +240,19 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 8: _t->handleBytesWritten((*reinterpret_cast< std::add_pointer_t<qint64>>(_a[1]))); break;
         case 9: _t->handleWriteTimeout(); break;
         case 10: _t->manualPowerSet(); break;
+        case 11: _t->updateAirpseed((*reinterpret_cast< std::add_pointer_t<QList<float>>>(_a[1]))); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+        case 11:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QList<float> >(); break;
+            }
+            break;
         }
     }
 }
@@ -250,13 +276,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 11)
+        if (_id < 12)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 11;
+        _id -= 12;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 11)
-            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 11;
+        if (_id < 12)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 12;
     }
     return _id;
 }

@@ -17,14 +17,14 @@ class MessageHandler : public QObject
     Q_OBJECT
 public:
     explicit MessageHandler(QObject *parent = nullptr);
+    void handleMessage(QByteArray msg);
 
 signals:
     void airspeedReady(QList<float> data);
-    void pressureTapReady(QList<float> data);
+    void pressureTapReady(QList<double> data);
 
 
 private:
-    void handleMessage(QByteArray msg);
     void parseAirspeedMessage(QList<QByteArray> *msgList);
     void parsePressureTapMessage(QList<QByteArray> *msgList);
 

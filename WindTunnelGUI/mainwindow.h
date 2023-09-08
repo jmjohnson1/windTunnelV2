@@ -36,7 +36,7 @@ private slots:
 
     void manualPowerSet();
 
-    void updateAirpseed(QList<float> &data);
+    void updateAirpseed(QList<float> data);
 
 private:
     void initActionsConnections();
