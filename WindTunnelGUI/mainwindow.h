@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QSerialPort>
 #include "airfoildialog.h"
+#include "messagehandler.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -35,6 +36,8 @@ private slots:
 
     void manualPowerSet();
 
+    void updateAirpseed(QList<float> &data);
+
 private:
     void initActionsConnections();
     void showStatusMessage(const QString &message);
@@ -48,5 +51,8 @@ private:
     QTimer *m_timer = nullptr;
     QSerialPort *m_serial = nullptr;
     AirfoilDialog *m_airfoil = nullptr;
+    MessageHandler *m_messageHandler = nullptr;
+    QByteArray messageReceived;
+    bool storeMessage = false;
 };
 #endif // MAINWINDOW_H

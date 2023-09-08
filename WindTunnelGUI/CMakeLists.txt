@@ -25,6 +25,7 @@ set(PROJECT_SOURCES
         settingsdialog.ui
         qcustomplot.h
         qcustomplot.cpp
+        messagehandler.h messagehandler.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

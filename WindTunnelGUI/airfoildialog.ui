@@ -23,7 +23,7 @@
   <customwidget>
    <class>QCustomPlot</class>
    <extends>QWidget</extends>
-   <header>../../../WindTunnelGUI/qcustomplot.h</header>
+   <header>../../../windTunnelGUI/qcustomplot.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
