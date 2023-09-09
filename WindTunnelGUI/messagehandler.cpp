@@ -11,7 +11,7 @@ void MessageHandler::handleMessage(QByteArray msg) {
     QList<QByteArray> messageList;
     messageList = msg.split(',');
     // Call the relevant function to parse
-    int msgID = messageList[0].toInt();
+    msgID_enum msgID = static_cast<msgID_enum>(messageList[0].toInt());
     switch (msgID) {
     case airspeed_msgID:
         parseAirspeedMessage(&messageList);
@@ -31,15 +31,14 @@ void MessageHandler::parseAirspeedMessage(QList<QByteArray> *msgList) {
         return;
     }
     /* Airspeed Message Format:
-     * <msgID,airspeed,staticPressure_ts,totalPressure>
+     * <msgID,airspeed,dynamicPressure_ts>
      * Airspeed is in (m/s)
      * Pressure measurements in Pascals
      * Static pressure comes from the port in the test section
     */
     QList<float> airspeedData;
-    airspeedData[0] = msgList->at(1).toFloat();
-    airspeedData[1] = msgList->at(2).toFloat();
-    airspeedData[2] = msgList->at(3).toFloat();
+    airspeedData.append(msgList->at(1).toFloat());
+    airspeedData.append(msgList->at(2).toFloat());
 
     emit airspeedReady(airspeedData);
 }

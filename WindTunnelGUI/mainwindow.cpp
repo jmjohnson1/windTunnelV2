@@ -9,6 +9,8 @@
 
 static constexpr std::chrono::seconds kWriteTimeout = std::chrono::seconds{5};
 
+int receivedMessageCounter = 0;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
@@ -32,11 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->manualFanSetButton, &QPushButton::clicked, this, &MainWindow::manualPowerSet);
     connect(ui->button_OpenAirfoilDialog, &QPushButton::clicked, m_airfoil, &AirfoilDialog::show);
     connect(m_serial, &QSerialPort::readyRead, this, &MainWindow::readData);
-<<<<<<< HEAD
-=======
     connect(m_messageHandler, &MessageHandler::airspeedReady, this, &MainWindow::updateAirpseed);
-    connect(m_messageHandler, &MessageHandler::pressureTapReady, m_airfoil, &AirfoilDialog::plotPressureData);
->>>>>>> 49a8859b5d867deba7632fdd36d6476462720c1d
 
     initActionsConnections();
 }
@@ -90,16 +88,16 @@ void MainWindow::writeData(const QByteArray &data) {
 
 void MainWindow::readData() {
     QByteArray data = m_serial->read(1);
-    qDebug() << "Data: " << data;
     if (!strcmp(data, "<")) {
-        storeMessage = true;
-    } else if (!strcmp(data, ">")) {
-        storeMessage = false;
-        qDebug() << "Message: " << messageReceived;
+        data = m_serial->read(1);
+        while(strcmp(data, ">")) {
+          messageReceived.append(data);
+          data = m_serial->read(1);
+        }
+        qDebug() << messageReceived;
         m_messageHandler->handleMessage(messageReceived);
         messageReceived.clear();
-    } else if (storeMessage) {
-        messageReceived.append(data);
+        m_serial->clear(QSerialPort::Input);
     }
 }
 
@@ -171,6 +169,5 @@ void MainWindow::manualPowerSet()
 
 void MainWindow::updateAirpseed(QList<float> data) {
     ui->speedLCD->display(data[0]);
-    ui->staticPressureLCD->display(data[1]);
-    ui->totalPressureLCD->display(data[2]);
+    ui->dynamicPressureLCD->display(data[1]);
 }

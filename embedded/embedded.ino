@@ -85,12 +85,18 @@ void ScanPressureTaps() {
 }
 
 void GetAirspeed() {
+  pSensorAspd.Read();
 	float deltaP = pSensorAspd.pres_pa();
 	float aspd = sqrt(2.0f*deltaP / 1.225f);
+  if (deltaP < 0.0f) {
+    aspd = 0.0f;
+  }
 	Serial.print("<");
   Serial.print(MSG_ID_AIRSPEED);
   Serial.print(",");
 	Serial.print(aspd);
+  Serial.print(",");
+  Serial.println(deltaP);
 	Serial.println(">");
 }
 
@@ -110,8 +116,9 @@ void unrecognized()
 }
 
 void setup() {
+  Serial.begin(115200);
+  while(!Serial);
   Serial.println("Initializing...");
-  Serial.begin(9600);
   Wire.begin();
   Wire.setClock(100000);
   fan1.attach(fan1Pin);
@@ -142,6 +149,7 @@ void setup() {
 
 void loop() {
 	sCmd.readSerial();
-	//GetAirspeed();
+	GetAirspeed();
+  delay(100);
 }
 

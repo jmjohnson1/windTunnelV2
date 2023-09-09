@@ -4,12 +4,12 @@
 #include <QObject>
 #include <QDebug>
 
-#define AIRSPEED_MSG_LENGTH 4
+#define AIRSPEED_MSG_LENGTH 3
 #define PRESSURETAP_MSG_LENGTH 21
 
 enum msgID_enum {
-    airspeed_msgID,
-    pressureTap_msgID
+    airspeed_msgID = 2,
+    pressureTap_msgID = 1
 };
 
 class MessageHandler : public QObject
