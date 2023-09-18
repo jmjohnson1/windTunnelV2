@@ -6,14 +6,22 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>522</width>
-    <height>420</height>
+    <width>475</width>
+    <height>494</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="0">
+    <widget class="QGroupBox" name="pTapLCD_group">
+     <property name="title">
+      <string>Pressure Tap Readings</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_pTaps"/>
+    </widget>
+   </item>
    <item row="0" column="0">
     <widget class="QCustomPlot" name="AirfoilDataPlot" native="true"/>
    </item>
@@ -23,7 +31,7 @@
   <customwidget>
    <class>QCustomPlot</class>
    <extends>QWidget</extends>
-   <header>../../../windTunnelGUI/qcustomplot.h</header>
+   <header>qcustomplot.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

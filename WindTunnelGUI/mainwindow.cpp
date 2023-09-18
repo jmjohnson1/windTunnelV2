@@ -9,8 +9,6 @@
 
 static constexpr std::chrono::seconds kWriteTimeout = std::chrono::seconds{5};
 
-int receivedMessageCounter = 0;
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
@@ -35,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->button_OpenAirfoilDialog, &QPushButton::clicked, m_airfoil, &AirfoilDialog::show);
     connect(m_serial, &QSerialPort::readyRead, this, &MainWindow::readData);
     connect(m_messageHandler, &MessageHandler::airspeedReady, this, &MainWindow::updateAirpseed);
+    connect(m_messageHandler, &MessageHandler::pressureTapReady, m_airfoil, &AirfoilDialog::plotPressureData);
 
     initActionsConnections();
 }
@@ -87,19 +86,67 @@ void MainWindow::writeData(const QByteArray &data) {
 }
 
 void MainWindow::readData() {
-    QByteArray data = m_serial->read(1);
-    if (!strcmp(data, "<")) {
-        data = m_serial->read(1);
-        while(strcmp(data, ">")) {
-          messageReceived.append(data);
-          data = m_serial->read(1);
+    QByteArray data = m_serial->readAll();
+
+    // Check if read is in progress
+    if (readInProgress == true) {
+        // Check if the current buffer contains a stop bit
+        uint8_t stop_idx_plus1 = checkStopBit(&data);
+        if (stop_idx_plus1 > 0) { // Stop bit exists in data
+          for (int idx = 0; idx < stop_idx_plus1; idx++) {
+              messageReceived.append(data[idx]);
+          }
+          qDebug() << messageReceived;
+          readInProgress = false;
+          m_messageHandler->handleMessage(messageReceived);
+          messageReceived.clear();
+          return;
         }
-        qDebug() << messageReceived;
-        m_messageHandler->handleMessage(messageReceived);
-        messageReceived.clear();
-        m_serial->clear(QSerialPort::Input);
+
+        for (int idx = 0; idx < data.length(); idx++) {
+          messageReceived.append(data[idx]);
+        }
+
+    } else {
+        // Check if the current buffer contains a start bit
+        uint8_t start_idx_plus1 = checkStartBit(&data);
+        if (start_idx_plus1) { // Start bit exists in data
+             // Check if the current buffer contains a stop bit
+             uint8_t stop_idx_plus1 = checkStopBit(&data, start_idx_plus1 - 1);
+             if (stop_idx_plus1 > 0) { // Stop bit exists in data
+               for (int idx = 0; idx < stop_idx_plus1; idx++) {
+                  messageReceived.append(data[idx]);
+               }
+               qDebug() << messageReceived;
+               readInProgress = false;
+               m_messageHandler->handleMessage(messageReceived);
+               messageReceived.clear();
+               return;
+             }
+
+             for (int idx = 0; idx < data.length(); idx++) {
+               messageReceived.append(data[idx]);
+             }
+        }
     }
 }
+
+unsigned int MainWindow::checkStartBit(const QByteArray *data) {
+    for (int idx = 0; idx < data->length(); idx++) {
+        if (data->at(idx) == 0x3C) // ASCII code for '<'
+          return (idx + 1);
+    }
+    return 0;
+}
+
+unsigned int MainWindow::checkStopBit(const QByteArray *data, int startIndex) {
+    for (int idx = startIndex; idx < data->length(); idx++) {
+        if (data->at(idx) == 0x3E) // ASCII code for '>'
+          return (idx + 1);
+    }
+    return 0;
+}
+
 
 void MainWindow::handleError(QSerialPort::SerialPortError error) {
     if (error == QSerialPort::ResourceError) {

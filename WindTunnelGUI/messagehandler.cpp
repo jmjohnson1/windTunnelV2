@@ -26,10 +26,6 @@ void MessageHandler::handleMessage(QByteArray msg) {
 }
 
 void MessageHandler::parseAirspeedMessage(QList<QByteArray> *msgList) {
-    if (msgList->length() != AIRSPEED_MSG_LENGTH) {
-        qDebug() << "Incorrect arispeed message length";
-        return;
-    }
     /* Airspeed Message Format:
      * <msgID,airspeed,dynamicPressure_ts>
      * Airspeed is in (m/s)
@@ -44,17 +40,13 @@ void MessageHandler::parseAirspeedMessage(QList<QByteArray> *msgList) {
 }
 
 void MessageHandler::parsePressureTapMessage(QList<QByteArray> *msgList) {
-    if (msgList->length() != PRESSURETAP_MSG_LENGTH) {
-        qDebug() << "Incorrect pressure tap message length";
-        return;
-    }
     /* Pressure Tap Message Format:
      * <msgID, tap1, tap2, ..., tap20>
      * Pressure measurements in pascals
     */
     QList<double> pressureTapData;
-    for (int i = 0; i < PRESSURETAP_MSG_LENGTH; ++i) {
-        pressureTapData[i] = msgList->at(i+1).toFloat();
+    for (int i = 0; i < 20; ++i) {
+        pressureTapData.append(msgList->at(i+1).toFloat());
     }
 
     emit pressureTapReady(pressureTapData);

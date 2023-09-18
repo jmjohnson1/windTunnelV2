@@ -22,6 +22,9 @@ public slots:
 private:
     Ui::AirfoilDialog *ui;
     void SetupPlot();
+    int numberTaps = 20;
+    QLCDNumber *LCDNumber = nullptr;
+    QLabel *LCDLabels = nullptr;
 };
 
 #endif // AIRFOILDIALOG_H
