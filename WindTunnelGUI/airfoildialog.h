@@ -19,6 +19,10 @@ public:
 public slots:
     void plotPressureData(QList<double> data);
 
+public signals:
+
+
+
 private:
     Ui::AirfoilDialog *ui;
     void SetupPlot();

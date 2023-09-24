@@ -9,6 +9,9 @@ MessageHandler::MessageHandler(QObject *parent)
 void MessageHandler::handleMessage(QByteArray msg) {
     // Split the message and get the message id
     QList<QByteArray> messageList;
+    msg.removeFirst();
+    msg.removeLast();
+    msg = msg.simplified();
     messageList = msg.split(',');
     // Call the relevant function to parse
     msgID_enum msgID = static_cast<msgID_enum>(messageList[0].toInt());

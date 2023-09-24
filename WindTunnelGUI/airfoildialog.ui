@@ -15,6 +15,9 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="0">
+    <widget class="QCustomPlot" name="AirfoilDataPlot" native="true"/>
+   </item>
+   <item row="2" column="0">
     <widget class="QGroupBox" name="pTapLCD_group">
      <property name="title">
       <string>Pressure Tap Readings</string>
@@ -23,7 +26,11 @@
     </widget>
    </item>
    <item row="0" column="0">
-    <widget class="QCustomPlot" name="AirfoilDataPlot" native="true"/>
+    <widget class="QPushButton" name="pTap_runButton">
+     <property name="text">
+      <string>Run</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
