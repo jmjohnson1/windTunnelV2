@@ -19,6 +19,8 @@ const uint8_t pSensorTaps_addr = 0x22;
 const uint8_t pSensorAspd_addr = 0x23;
 bfs::Ams5915 pSensorTaps(&Wire, pSensorTaps_addr, bfs::Ams5915::AMS5915_0020_D_B);
 bfs::Ams5915 pSensorAspd(&Wire, pSensorAspd_addr, bfs::Ams5915::AMS5915_0020_D_B);
+float meanBias_pAspd = 0.0f;
+float meanBias_pTaps = 0.0f;
 
 // Solenoid valve pins //
 const uint8_t sol1_pinMCP = 0;
@@ -79,14 +81,14 @@ void ScanPressureTaps() {
 	for (int i = 0; i < 20; i++){
 		valveArray[i].UpdatePressure();
 		Serial.print(",");
-		Serial.print(valveArray[i].GetPressure());
+		Serial.print(valveArray[i].GetPressure() - meanBias_pTaps);
 	}
 	Serial.println(">");
 }
 
 void GetAirspeed() {
   pSensorAspd.Read();
-	float deltaP = pSensorAspd.pres_pa();
+	float deltaP = pSensorAspd.pres_pa() - meanBias_pAspd;
 	float aspd = sqrt(2.0f*deltaP / 1.225f);
   if (deltaP < 0.0f) {
     aspd = 0.0f;
@@ -115,6 +117,17 @@ void unrecognized()
   Serial.println("What?"); 
 }
 
+float tarePSensor(bfs::Ams5915 *sensor) {
+	int numSamples = 1000;
+	float sum = 0;
+	for (int i = 0; i < numSamples; i++) {
+		sensor->Read();
+		sum += sensor->pres_pa();
+	}
+	float meanBias = sum/numSamples;
+	return meanBias;
+}
+
 void setup() {
   Serial.begin(115200);
   while(!Serial);
@@ -137,6 +150,10 @@ void setup() {
   for (int i = 16; i < 20; i++) {
 		valveArray[i].ConfigureTeensyPinForOutput();
   }
+
+	// Tare pressure sensors
+	meanBias_pAspd = tarePSensor(&pSensorAspd);
+	meanBias_pTaps = tarePSensor(&pSensorTaps);
 	
 	// Commands
 	sCmd.addCommand("!SCANTAPS", ScanPressureTaps);
