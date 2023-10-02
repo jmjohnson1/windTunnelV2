@@ -19,13 +19,13 @@ public:
 public slots:
     void plotPressureData(QList<double> data);
 
-public signals:
-
-
+signals:
+    void runButtonPushed();
 
 private:
     Ui::AirfoilDialog *ui;
     void SetupPlot();
+    void runButtonPassthrough();
     int numberTaps = 20;
     QLCDNumber *LCDNumber = nullptr;
     QLabel *LCDLabels = nullptr;

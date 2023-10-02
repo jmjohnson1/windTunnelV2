@@ -13,6 +13,7 @@ pressureTap::pressureTap(int pinNum, int pinLoc, bfs::Ams5915 *pSensor, MCP23017
 }
 
 void pressureTap::UpdatePressure() {
+  pressureSensor->Read();
 	if (pinLocation) {
 		ioExpander->digitalWrite(pinNumber, HIGH);
 	} else {
@@ -32,6 +33,7 @@ float pressureTap::GetPressure() {
 }
 
 void pressureTap::UpdateTemperature() {
+  pressureSensor->Read();
 	temperatureReading = pressureSensor->die_temp_c();
 }
 

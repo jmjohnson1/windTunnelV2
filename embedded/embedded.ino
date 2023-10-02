@@ -84,6 +84,7 @@ void ScanPressureTaps() {
 		Serial.print(valveArray[i].GetPressure() - meanBias_pTaps);
 	}
 	Serial.println(">");
+	Serial.println("Done");
 }
 
 void GetAirspeed() {
@@ -110,6 +111,7 @@ void SetFanPower() {
   int powerScaled = power/100.0f * 180.0f;
   fan1.write(powerScaled);
   fan2.write(powerScaled);
+	Serial.println("Done");
 }
 
 void unrecognized()
@@ -161,6 +163,8 @@ void setup() {
 	sCmd.addCommand("!SETPOWER", SetFanPower);
   sCmd.addDefaultHandler(unrecognized);  // Handler for command that isn't matched  (says "What?") 
 
+	pinMode(LED_BUILTIN, OUTPUT);
+	digitalWrite(LED_BUILTIN, HIGH);
   Serial.println("Setup complete");
 }
 

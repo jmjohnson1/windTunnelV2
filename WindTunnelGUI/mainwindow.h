@@ -37,6 +37,7 @@ private slots:
     void handleWriteTimeout();
 
     void manualPowerSet();
+    void scanPressureTaps();
 
     void updateAirpseed(QList<float> data);
 

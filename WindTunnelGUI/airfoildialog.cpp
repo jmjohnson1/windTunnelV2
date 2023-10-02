@@ -32,6 +32,8 @@ AirfoilDialog::AirfoilDialog(QWidget *parent) :
             }
         }
     }
+
+    connect(ui->pTap_runButton, &QPushButton::clicked, this, &AirfoilDialog::runButtonPassthrough);
 }
 
 AirfoilDialog::~AirfoilDialog()
@@ -45,13 +47,24 @@ void AirfoilDialog::SetupPlot() {
     ui->AirfoilDataPlot->yAxis->setRange(-1, 1);
     ui->AirfoilDataPlot->xAxis->setLabel(QString::fromUtf8("x/c"));
     ui->AirfoilDataPlot->yAxis->setLabel(QString::fromUtf8("Cₚ"));
+    ui->AirfoilDataPlot->graph(0)->setLineStyle(QCPGraph::lsNone);
+    ui->AirfoilDataPlot->graph(0)->setScatterStyle(QCPScatterStyle::ssDisc);
 }
 
 void AirfoilDialog::plotPressureData(QList<double> data) {
     // TODO: Replace x
     QVector<double> x = {0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9};
+    // TODO: Add calculations for cp
+    for (int i = 0; i < data.size(); i++) {
+        data[i] = data[i]/10.0;
+    }
+    // TODO: Fix persistence
     ui->AirfoilDataPlot->graph(0)->setData(x, data);
     for (int ndx = 0; ndx < numberTaps; ndx++) {
-        LCDLabels[ndx].setNum(data[ndx]);
+        LCDNumber[ndx].display(data[ndx]);
     }
+}
+
+void AirfoilDialog::runButtonPassthrough() {
+    emit runButtonPushed();
 }

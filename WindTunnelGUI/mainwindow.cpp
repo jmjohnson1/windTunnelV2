@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_serial, &QSerialPort::readyRead, this, &MainWindow::readData);
     connect(m_messageHandler, &MessageHandler::airspeedReady, this, &MainWindow::updateAirpseed);
     connect(m_messageHandler, &MessageHandler::pressureTapReady, m_airfoil, &AirfoilDialog::plotPressureData);
+    connect(m_airfoil, &AirfoilDialog::runButtonPushed, this, &MainWindow::scanPressureTaps);
 
     initActionsConnections();
 }
@@ -44,6 +45,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+// SERIAL STUFF
 void MainWindow::openSerialPort() {
     const SettingsDialog::Settings p = m_settings->settings();
     m_serial->setPortName(p.name);
@@ -85,8 +87,32 @@ void MainWindow::writeData(const QByteArray &data) {
     }
 }
 
+void MainWindow::handleError(QSerialPort::SerialPortError error) {
+    if (error == QSerialPort::ResourceError) {
+        QMessageBox::critical(this, tr("Critical Error"), m_serial->errorString());
+        closeSerialPort();
+    }
+}
+
+void MainWindow::handleBytesWritten(qint64 bytes) {
+    m_bytesToWrite -= bytes;
+    if (m_bytesToWrite == 0) {
+        m_timer->stop();
+    }
+}
+
+void MainWindow::handleWriteTimeout() {
+    const QString error = tr("Write operation timed out for port %1\n"
+                             "Error: %2").arg(m_serial->portName(),
+                                   m_serial->errorString());
+
+    showWriteError(error);
+}
+
+// Serial message reading
 void MainWindow::readData() {
     QByteArray data = m_serial->readAll();
+    qDebug() << data;
 
     // Check if read is in progress
     if (readInProgress == true) {
@@ -96,7 +122,6 @@ void MainWindow::readData() {
           for (int idx = 0; idx < stop_idx_plus1; idx++) {
               messageReceived.append(data[idx]);
           }
-          qDebug() << messageReceived;
           readInProgress = false;
           m_messageHandler->handleMessage(messageReceived);
           messageReceived.clear();
@@ -111,13 +136,13 @@ void MainWindow::readData() {
         // Check if the current buffer contains a start bit
         uint8_t start_idx_plus1 = checkStartBit(&data);
         if (start_idx_plus1) { // Start bit exists in data
+          readInProgress = true;
              // Check if the current buffer contains a stop bit
              uint8_t stop_idx_plus1 = checkStopBit(&data, start_idx_plus1 - 1);
              if (stop_idx_plus1 > 0) { // Stop bit exists in data
                for (int idx = 0; idx < stop_idx_plus1; idx++) {
                   messageReceived.append(data[idx]);
                }
-               qDebug() << messageReceived;
                readInProgress = false;
                m_messageHandler->handleMessage(messageReceived);
                messageReceived.clear();
@@ -147,29 +172,6 @@ unsigned int MainWindow::checkStopBit(const QByteArray *data, int startIndex) {
     return 0;
 }
 
-
-void MainWindow::handleError(QSerialPort::SerialPortError error) {
-    if (error == QSerialPort::ResourceError) {
-        QMessageBox::critical(this, tr("Critical Error"), m_serial->errorString());
-        closeSerialPort();
-    }
-}
-
-void MainWindow::handleBytesWritten(qint64 bytes) {
-    m_bytesToWrite -= bytes;
-    if (m_bytesToWrite == 0) {
-        m_timer->stop();
-    }
-}
-
-void MainWindow::handleWriteTimeout() {
-    const QString error = tr("Write operation timed out for port %1\n"
-                             "Error: %2").arg(m_serial->portName(),
-                                   m_serial->errorString());
-
-    showWriteError(error);
-}
-
 void MainWindow::initActionsConnections() {
     connect(ui->actionConnect, &QAction::triggered, this, &MainWindow::openSerialPort);
     connect(ui->actionDisconnect, &QAction::triggered, this, &MainWindow::closeSerialPort);
@@ -187,16 +189,6 @@ void MainWindow::updateFanAutoSliderReadout(int position)
     ui->autoSpeedSliderReadout->setNum(position);
 }
 
-
-void MainWindow::autoSpeedSet()
-{
-    ui->speedSetpointLCD->display(ui->autoSpeedSlider->value());
-
-    QByteArray command("!SETSPEED ");
-    command.append(QByteArray::number(ui->autoSpeedSlider->value()));
-    qDebug() << command;
-}
-
 void MainWindow::showStatusMessage(const QString &message)
 {
     m_status->setText(message);
@@ -207,14 +199,34 @@ void MainWindow::showWriteError(const QString &message)
     QMessageBox::warning(this, tr("Warning"), message);
 }
 
+void MainWindow::updateAirpseed(QList<float> data) {
+    ui->speedLCD->display(data[0]);
+    ui->dynamicPressureLCD->display(data[1]);
+}
+
+// COMMANDS
 void MainWindow::manualPowerSet()
 {
     QByteArray command("!SETPOWER ");
     command.append(QByteArray::number(ui->fan1ManualSlider->value()));
+    command.append("\r\n");
     qDebug() << command;
+    writeData(command);
 }
 
-void MainWindow::updateAirpseed(QList<float> data) {
-    ui->speedLCD->display(data[0]);
-    ui->dynamicPressureLCD->display(data[1]);
+void MainWindow::scanPressureTaps() {
+    QByteArray command("!SCANTAPS\r\n");
+    qDebug() << command;
+    writeData(command);
+}
+
+void MainWindow::autoSpeedSet()
+{
+    ui->speedSetpointLCD->display(ui->autoSpeedSlider->value());
+
+    QByteArray command("!SETSPEED ");
+    command.append(QByteArray::number(ui->autoSpeedSlider->value()));
+    command.append("\r\n");
+    qDebug() << command;
+    writeData(command);
 }
