@@ -111,6 +111,7 @@ void SetFanPower() {
   int powerScaled = power/100.0f * 180.0f;
   fan1.write(powerScaled);
   fan2.write(powerScaled);
+  Serial.println(*arg);
 	Serial.println("Done");
 }
 
