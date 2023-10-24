@@ -5,10 +5,12 @@
 #include <QSerialPort>
 #include "airfoildialog.h"
 #include "messagehandler.h"
+#include "sharedData.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
+
 
 class QLabel;
 class SettingsDialog;
@@ -57,5 +59,6 @@ private:
     MessageHandler *m_messageHandler = nullptr;
     QByteArray messageReceived;
     bool readInProgress = false;
+    sharedData *m_sharedData = nullptr;
 };
 #endif // MAINWINDOW_H

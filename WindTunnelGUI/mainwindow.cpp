@@ -16,7 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_timer(new QTimer(this)),
     m_serial(new QSerialPort(this)),
     m_airfoil(new AirfoilDialog(this)),
-    m_messageHandler(new MessageHandler(this))
+    m_messageHandler(new MessageHandler(this)),
+    m_sharedData(new sharedData())
 {
     ui->setupUi(this);
 
@@ -26,15 +27,17 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->fan1ManualSlider, &QSlider::sliderMoved, this, &MainWindow::updateFanManualSliderReadout);
     connect(ui->fan1ManualSlider, &QSlider::valueChanged, this, &MainWindow::updateFanManualSliderReadout);
-    connect(ui->autoSpeedSlider, &QSlider::sliderMoved, this, &MainWindow::updateFanAutoSliderReadout);
-    connect(ui->autoSpeedSlider, &QSlider::valueChanged, this, &MainWindow::updateFanAutoSliderReadout);
-    connect(ui->autoSpeedSetButton, &QPushButton::clicked, this, &MainWindow::autoSpeedSet);
+    connect(ui->smokeResSlider, &QSlider::sliderMoved, this, &MainWindow::updateFanAutoSliderReadout);
+    connect(ui->smokeResSlider, &QSlider::valueChanged, this, &MainWindow::updateFanAutoSliderReadout);
+    connect(ui->smokeResSetButton, &QPushButton::clicked, this, &MainWindow::autoSpeedSet);
     connect(ui->manualFanSetButton, &QPushButton::clicked, this, &MainWindow::manualPowerSet);
     connect(ui->button_OpenAirfoilDialog, &QPushButton::clicked, m_airfoil, &AirfoilDialog::show);
     connect(m_serial, &QSerialPort::readyRead, this, &MainWindow::readData);
     connect(m_messageHandler, &MessageHandler::airspeedReady, this, &MainWindow::updateAirpseed);
     connect(m_messageHandler, &MessageHandler::pressureTapReady, m_airfoil, &AirfoilDialog::plotPressureData);
     connect(m_airfoil, &AirfoilDialog::runButtonPushed, this, &MainWindow::scanPressureTaps);
+
+    m_airfoil->setSharedData(m_sharedData);
 
     initActionsConnections();
 }
@@ -186,7 +189,7 @@ void MainWindow::updateFanManualSliderReadout(int position)
 
 void MainWindow::updateFanAutoSliderReadout(int position)
 {
-    ui->autoSpeedSliderReadout->setNum(position);
+    ui->smokeResSliderReadout->setNum(position);
 }
 
 void MainWindow::showStatusMessage(const QString &message)
@@ -202,11 +205,15 @@ void MainWindow::showWriteError(const QString &message)
 void MainWindow::updateAirpseed(QList<float> data) {
     ui->speedLCD->display(data[0]);
     ui->dynamicPressureLCD->display(data[1]);
+    m_sharedData->setDynamicPressure(data[1]);
+    m_sharedData->setTsAirspeed(data[0]);
 }
 
 // COMMANDS
 void MainWindow::manualPowerSet()
 {
+    ui->powerSetpointLCD->display(ui->fan1ManualSlider->value());
+
     QByteArray command("!SETPOWER ");
     command.append(QByteArray::number(ui->fan1ManualSlider->value()));
     command.append("\r\n");
@@ -222,10 +229,8 @@ void MainWindow::scanPressureTaps() {
 
 void MainWindow::autoSpeedSet()
 {
-    ui->speedSetpointLCD->display(ui->autoSpeedSlider->value());
-
-    QByteArray command("!SETSPEED ");
-    command.append(QByteArray::number(ui->autoSpeedSlider->value()));
+    QByteArray command("!SETSMOKE ");
+    command.append(QByteArray::number(ui->smokeResSlider->value()));
     command.append("\r\n");
     qDebug() << command;
     writeData(command);

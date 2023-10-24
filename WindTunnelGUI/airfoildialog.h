@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "qcustomplot.h"
+#include "sharedData.h"
 
 namespace Ui {
 class AirfoilDialog;
@@ -15,6 +16,10 @@ class AirfoilDialog : public QDialog
 public:
     explicit AirfoilDialog(QWidget *parent = nullptr);
     ~AirfoilDialog();
+
+    void setSharedData(sharedData *sd) {
+      af_sharedData = sd;
+    }
 
 public slots:
     void plotPressureData(QList<double> data);
@@ -29,6 +34,7 @@ private:
     int numberTaps = 20;
     QLCDNumber *LCDNumber = nullptr;
     QLabel *LCDLabels = nullptr;
+    sharedData *af_sharedData = nullptr;
 };
 
 #endif // AIRFOILDIALOG_H

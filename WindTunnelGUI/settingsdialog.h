@@ -58,6 +58,7 @@ private:
     Ui::SettingsDialog *m_ui = nullptr;
     Settings m_currentSettings;
     QIntValidator *m_intValidator = nullptr;
+
 };
 
 #endif // SETTINGSDIALOG_H

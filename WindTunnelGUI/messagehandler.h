@@ -23,11 +23,9 @@ signals:
     void airspeedReady(QList<float> data);
     void pressureTapReady(QList<double> data);
 
-
 private:
     void parseAirspeedMessage(QList<QByteArray> *msgList);
     void parsePressureTapMessage(QList<QByteArray> *msgList);
-
 };
 
 #endif // MESSAGEHANDLER_H

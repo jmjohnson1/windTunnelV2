@@ -92,10 +92,10 @@
        <item row="0" column="0">
         <widget class="QGroupBox" name="manualFanControlGroup">
          <property name="title">
-          <string>Manual Fan Control</string>
+          <string>Fan Control</string>
          </property>
          <property name="checkable">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <property name="checked">
           <bool>false</bool>
@@ -136,6 +136,9 @@
           </item>
           <item row="0" column="0" colspan="3">
            <widget class="QSlider" name="fan1ManualSlider">
+            <property name="maximum">
+             <number>100</number>
+            </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -152,9 +155,9 @@
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QGroupBox" name="autoSpeedControlGroup">
+        <widget class="QGroupBox" name="smokeResControlGroup">
          <property name="title">
-          <string>Speed Selection</string>
+          <string>Smoke Reservoir Fan</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="1" column="0">
@@ -184,21 +187,24 @@
            </spacer>
           </item>
           <item row="1" column="1">
-           <widget class="QPushButton" name="autoSpeedSetButton">
+           <widget class="QPushButton" name="smokeResSetButton">
             <property name="text">
              <string>Set</string>
             </property>
            </widget>
           </item>
           <item row="0" column="0" colspan="3">
-           <widget class="QSlider" name="autoSpeedSlider">
+           <widget class="QSlider" name="smokeResSlider">
+            <property name="maximum">
+             <number>100</number>
+            </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
            </widget>
           </item>
           <item row="0" column="3">
-           <widget class="QLabel" name="autoSpeedSliderReadout">
+           <widget class="QLabel" name="smokeResSliderReadout">
             <property name="text">
              <string>0</string>
             </property>
@@ -247,7 +253,7 @@
           <item row="2" column="0">
            <widget class="QLabel" name="label_4">
             <property name="text">
-             <string>Speed Setpoint</string>
+             <string>Power Setpoint</string>
             </property>
            </widget>
           </item>
@@ -259,7 +265,7 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLCDNumber" name="speedSetpointLCD"/>
+           <widget class="QLCDNumber" name="powerSetpointLCD"/>
           </item>
           <item row="0" column="1">
            <widget class="QLCDNumber" name="dynamicPressureLCD"/>

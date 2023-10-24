@@ -33,6 +33,8 @@ AirfoilDialog::AirfoilDialog(QWidget *parent) :
         }
     }
 
+
+
     connect(ui->pTap_runButton, &QPushButton::clicked, this, &AirfoilDialog::runButtonPassthrough);
 }
 
@@ -54,9 +56,10 @@ void AirfoilDialog::SetupPlot() {
 void AirfoilDialog::plotPressureData(QList<double> data) {
     // TODO: Replace x
     QVector<double> x = {0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9};
-    // TODO: Add calculations for cp
     for (int i = 0; i < data.size(); i++) {
-        data[i] = data[i]/1.0;
+        // Data is the difference between static pressure at tap and free stream pressure
+        // Cp = (p_s - p_inf) / q_inf
+        data[i] = data[i]/af_sharedData->getDynamicPressure();
     }
     // TODO: Fix persistence
     ui->AirfoilDataPlot->graph(0)->setData(x, data);
