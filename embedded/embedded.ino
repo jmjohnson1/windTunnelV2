@@ -70,10 +70,7 @@ pressureTap valveArray[] = {
 // Fans
 const uint8_t fan1Pin = 4;
 const uint8_t fan2Pin = 5;
-const unit8_t fan3Pin = 6;
-Servo fan1;
-Servo fan2;
-Servo fan3;
+const uint8_t fan3Pin = 6;
 
 SerialCommand sCmd;
 
@@ -114,13 +111,14 @@ void SetFanPower() {
 	}
 	int power = atoi(*inputs);
 
-  // Need to scale this to be bewteen 0 and 180
-  int powerScaled = power/100.0f * 180.0f;
-  fan1.write(powerScaled);
-  fan2.write(powerScaled);
-  Serial.println(power);
+  // Need to scale this to be bewteen 0 and 255
+  int powerScaled = map(power, 0, 100, 0, 255);
+  analogWrite(fan1Pin, powerScaled);
+  analogWrite(fan2Pin, powerScaled);
+  Serial.println(powerScaled);
 	Serial.println("Done");
 }
+
 
 void SetSmokeFanPower() {
 	char *arg;
@@ -132,10 +130,11 @@ void SetSmokeFanPower() {
 	int power = atoi(*inputs);
 
   // Need to scale this to be bewteen 0 and 180
-  int powerScaled = power/100.0f * 180.0f;
-  fan3.write(powerScaled);
-  Serial.println(power);
+  int powerScaled = map(power, 0, 100, 0, 255);
+  analogWrite(fan3Pin, powerScaled);
+  Serial.println(powerScaled);
 	Serial.println("Done");
+}
 
 void unrecognized()
 {
@@ -159,9 +158,6 @@ void setup() {
   Serial.println("Initializing...");
   Wire.begin();
   Wire.setClock(100000);
-  fan1.attach(fan1Pin);
-  fan2.attach(fan2Pin);
-	fan3.attach(fan3Pin);
   if (!pSensorTaps.Begin()) {
     Serial.println("Pressure sensor 1 failed to initialize");
   }
