@@ -21,6 +21,7 @@ bfs::Ams5915 pSensorTaps(&Wire, pSensorTaps_addr, bfs::Ams5915::AMS5915_0020_D_B
 bfs::Ams5915 pSensorAspd(&Wire, pSensorAspd_addr, bfs::Ams5915::AMS5915_0020_D_B);
 float meanBias_pAspd = 0.0f;
 float meanBias_pTaps = 0.0f;
+float density = 1.225f;
 
 // Solenoid valve pins //
 const uint8_t sol1_pinMCP = 0;
@@ -88,8 +89,13 @@ void ScanPressureTaps() {
 
 void GetAirspeed() {
   pSensorAspd.Read();
-	float deltaP = pSensorAspd.pres_pa() - meanBias_pAspd;
-	float aspd = sqrt(2.0f*deltaP / 1.225f);
+  static uint8_t numberSamples = 10;
+  float runningSum = 0;
+  for (int i = 0; i < numberSamples; i++) {
+    runningSum += pSensorAspd.pres_pa() - meanBias_pAspd;
+  }
+  float deltaP = runningSum / static_cast<float>(numberSamples);
+	float aspd = sqrt(2.0f*deltaP / density);
   if (deltaP < 0.0f) {
     aspd = 0.0f;
   }
@@ -110,15 +116,21 @@ void SetFanPower() {
 		inputs[i] = arg;
 	}
 	int power = atoi(*inputs);
-
-  // Need to scale this to be bewteen 0 and 255
-  int powerScaled = map(power, 0, 100, 0, 255);
-  analogWrite(fan1Pin, powerScaled);
-  analogWrite(fan2Pin, powerScaled);
+  int powerScaled = 0;
+	// If the power settings is below 10%, use only one fan at power + 10%
+	if (power < 10 && power > 0) {
+		powerScaled = map(power+10, 0, 100, 0, 255);
+		analogWrite(fan1Pin, powerScaled);
+    analogWrite(fan2Pin, LOW);
+	} else {
+		// Need to scale this to be bewteen 0 and 255
+		powerScaled = map(power, 0, 100, 0, 255);
+		analogWrite(fan1Pin, powerScaled);
+		analogWrite(fan2Pin, powerScaled);
+	}
   Serial.println(powerScaled);
 	Serial.println("Done");
 }
-
 
 void SetSmokeFanPower() {
 	char *arg;
@@ -152,12 +164,19 @@ float tarePSensor(bfs::Ams5915 *sensor) {
 	return meanBias;
 }
 
+void TareAllPSensors() {
+	meanBias_pAspd = tarePSensor(&pSensorAspd);
+	meanBias_pTaps = tarePSensor(&pSensorTaps);
+}
+
 void setup() {
   Serial.begin(115200);
   while(!Serial);
   Serial.println("Initializing...");
   Wire.begin();
   Wire.setClock(100000);
+	// Wait 100 milliseconds
+	delay(100);
   if (!pSensorTaps.Begin()) {
     Serial.println("Pressure sensor 1 failed to initialize");
   }
@@ -173,18 +192,23 @@ void setup() {
 		valveArray[i].ConfigureTeensyPinForOutput();
   }
 
-	// Tare pressure sensors
-	meanBias_pAspd = tarePSensor(&pSensorAspd);
-	meanBias_pTaps = tarePSensor(&pSensorTaps);
+	TareAllPSensors();
 	
 	// Commands
 	sCmd.addCommand("!SCANTAPS", ScanPressureTaps);
 	//sCmd.addCommand("!SETSPEEDAUTO", AutoSpeedControlSet);
 	sCmd.addCommand("!SETPOWER", SetFanPower);
+  sCmd.addCommand("!SETSMOKE", SetSmokeFanPower);
+	sCmd.addCommand("!TARE", TareAllPSensors);
   sCmd.addDefaultHandler(unrecognized);  // Handler for command that isn't matched  (says "What?") 
 
 	pinMode(LED_BUILTIN, OUTPUT);
 	digitalWrite(LED_BUILTIN, HIGH);
+
+  analogWrite(fan1Pin, LOW);
+  analogWrite(fan2Pin, LOW);
+  analogWrite(fan3Pin, LOW);
+
   Serial.println("Setup complete");
 }
 

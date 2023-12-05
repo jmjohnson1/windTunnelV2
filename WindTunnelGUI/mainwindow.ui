@@ -24,20 +24,20 @@
        </sizepolicy>
       </property>
       <property name="title">
-       <string>Test Routines</string>
+       <string/>
       </property>
       <layout class="QGridLayout" name="gridLayout_6">
        <item row="0" column="1">
         <widget class="QPushButton" name="button_OpenAirfoilDialog">
          <property name="text">
-          <string>Airfoil</string>
+          <string>Scan Pressure Taps</string>
          </property>
         </widget>
        </item>
        <item row="0" column="3">
-        <widget class="QPushButton" name="button_OpenCylinderDialog">
+        <widget class="QPushButton" name="tareButton">
          <property name="text">
-          <string>Cylinder</string>
+          <string>Tare Pressure Sensors</string>
          </property>
         </widget>
        </item>
@@ -243,7 +243,7 @@
           <item row="0" column="0">
            <widget class="QLabel" name="label">
             <property name="text">
-             <string>Dynamic Pressure</string>
+             <string>Dynamic Pressure (Pa)</string>
             </property>
            </widget>
           </item>
@@ -253,14 +253,14 @@
           <item row="2" column="0">
            <widget class="QLabel" name="label_4">
             <property name="text">
-             <string>Power Setpoint</string>
+             <string>Power Setpoint (%)</string>
             </property>
            </widget>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_3">
             <property name="text">
-             <string>Speed</string>
+             <string>Speed (m/s)</string>
             </property>
            </widget>
           </item>

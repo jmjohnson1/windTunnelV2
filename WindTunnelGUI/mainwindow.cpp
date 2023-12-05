@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->smokeResSlider, &QSlider::valueChanged, this, &MainWindow::updateFanAutoSliderReadout);
     connect(ui->smokeResSetButton, &QPushButton::clicked, this, &MainWindow::autoSpeedSet);
     connect(ui->manualFanSetButton, &QPushButton::clicked, this, &MainWindow::manualPowerSet);
+    connect(ui->tareButton, &QPushButton::clicked, this, &MainWindow::tarePSensors);
     connect(ui->button_OpenAirfoilDialog, &QPushButton::clicked, m_airfoil, &AirfoilDialog::show);
     connect(m_serial, &QSerialPort::readyRead, this, &MainWindow::readData);
     connect(m_messageHandler, &MessageHandler::airspeedReady, this, &MainWindow::updateAirpseed);
@@ -231,6 +232,13 @@ void MainWindow::autoSpeedSet()
 {
     QByteArray command("!SETSMOKE ");
     command.append(QByteArray::number(ui->smokeResSlider->value()));
+    command.append("\r\n");
+    qDebug() << command;
+    writeData(command);
+}
+
+void MainWindow::tarePSensors() {
+    QByteArray command("!TARE");
     command.append("\r\n");
     qDebug() << command;
     writeData(command);

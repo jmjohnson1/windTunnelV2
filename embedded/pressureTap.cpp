@@ -1,7 +1,7 @@
 #include "pressureTap.h"
 #include "core_pins.h"
 
-pressureTap::pressureTap(int pinNum, int pinLoc, bfs::Ams5915 *pSensor, MCP23017 *mcp, int sampleFreq = 1) {
+pressureTap::pressureTap(int pinNum, int pinLoc, bfs::Ams5915 *pSensor, MCP23017 *mcp, int sampleFreq=1) {
 	pinNumber = pinNum;
 	pinLocation = pinLoc;
 	pressureReading = 0;
@@ -13,14 +13,23 @@ pressureTap::pressureTap(int pinNum, int pinLoc, bfs::Ams5915 *pSensor, MCP23017
 }
 
 void pressureTap::UpdatePressure() {
-  pressureSensor->Read();
+  uint32_t startTime = millis();
+  // Open valve
 	if (pinLocation) {
 		ioExpander->digitalWrite(pinNumber, HIGH);
 	} else {
 		digitalWrite(pinNumber, HIGH);
 	}
-	delay(samplePeriod);
-	pressureReading = pressureSensor->pres_pa();
+  // Read data
+	float runningSum = 0;
+  int numberSampled = 0;
+  while(millis() - startTime < samplePeriod) {
+    pressureSensor->Read();
+    runningSum += pressureSensor->pres_pa();
+    numberSampled++;
+  }
+  pressureReading = runningSum / static_cast<float>(numberSampled);
+  // Close valve
 	if (pinLocation) {
 		ioExpander->digitalWrite(pinNumber, LOW);
 	} else {

@@ -40,6 +40,7 @@ private slots:
 
     void manualPowerSet();
     void scanPressureTaps();
+    void tarePSensors();
 
     void updateAirpseed(QList<float> data);
 

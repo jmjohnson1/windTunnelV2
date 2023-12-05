@@ -27,13 +27,16 @@ public slots:
 signals:
     void runButtonPushed();
 
+private slots:
+  void on_pTapReadingsCheckbox_toggled(bool checked);
+
 private:
     Ui::AirfoilDialog *ui;
     void SetupPlot();
     void runButtonPassthrough();
     int numberTaps = 20;
-    QLCDNumber *LCDNumber = nullptr;
-    QLabel *LCDLabels = nullptr;
+    QLabel *rawPValue = nullptr;
+    QLabel *rawPLabel = nullptr;
     sharedData *af_sharedData = nullptr;
 };
 

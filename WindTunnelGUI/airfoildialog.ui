@@ -15,22 +15,38 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="0">
-    <widget class="QCustomPlot" name="AirfoilDataPlot" native="true"/>
-   </item>
-   <item row="2" column="0">
-    <widget class="QGroupBox" name="pTapLCD_group">
-     <property name="title">
-      <string>Pressure Tap Readings</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_pTaps"/>
-    </widget>
-   </item>
-   <item row="0" column="0">
     <widget class="QPushButton" name="pTap_runButton">
      <property name="text">
       <string>Run</string>
      </property>
     </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QCustomPlot" name="AirfoilDataPlot" native="true"/>
+   </item>
+   <item row="3" column="0">
+    <widget class="QCheckBox" name="pTapReadingsCheckbox">
+     <property name="text">
+      <string>Show Pressure Tap Readings</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QGroupBox" name="pTapLCD_group">
+     <property name="title">
+      <string>Pressure Tap Readings</string>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_pTaps"/>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QComboBox" name="UUT_type_selection"/>
    </item>
   </layout>
  </widget>
