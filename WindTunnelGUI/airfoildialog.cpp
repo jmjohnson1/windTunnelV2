@@ -5,7 +5,7 @@ AirfoilDialog::AirfoilDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AirfoilDialog)
 {
-  rawPValue = new QLabel[numberTaps];
+    rawPValue = new QLabel[numberTaps];
     rawPLabel = new QLabel[numberTaps];
 
     ui->setupUi(this);
@@ -34,6 +34,10 @@ AirfoilDialog::AirfoilDialog(QWidget *parent) :
     }
 
     connect(ui->pTap_runButton, &QPushButton::clicked, this, &AirfoilDialog::runButtonPassthrough);
+
+
+    ui->UUT_type_selection->addItem(tr("NACA 0012"));
+    ui->UUT_type_selection->addItem(tr("Cylinder"));
 }
 
 AirfoilDialog::~AirfoilDialog()
@@ -52,15 +56,20 @@ void AirfoilDialog::SetupPlot() {
 }
 
 void AirfoilDialog::plotPressureData(QList<double> data) {
-    // TODO: Replace x
-    QVector<double> x = {0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9};
+    QList<double> x;
+    if (ui->UUT_type_selection->currentIndex() == 0) {
+        x = QList<double>(x_by_c_airfoil);
+    } else if (ui->UUT_type_selection->currentIndex() == 1) {
+        x = QList<double>(x_by_c_cylinder);
+    }
+
     for (int i = 0; i < data.size(); i++) {
         // Data is the difference between static pressure at tap and free stream pressure
         // Cp = (p_s - p_inf) / q_inf
         data[i] = data[i]/af_sharedData->getDynamicPressure();
     }
-    // TODO: Fix persistence
-    ui->AirfoilDataPlot->graph(0)->setData(x, data);
+
+    ui->AirfoilDataPlot->graph(0)->setData(x, data, true);
     for (int ndx = 0; ndx < numberTaps; ndx++) {
         rawPValue[ndx].setText(QVariant(data[ndx]).toString());
     }

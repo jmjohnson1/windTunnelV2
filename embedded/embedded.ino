@@ -92,6 +92,7 @@ void GetAirspeed() {
   static uint8_t numberSamples = 10;
   float runningSum = 0;
   for (int i = 0; i < numberSamples; i++) {
+		pSensorAspd.Read();
     runningSum += pSensorAspd.pres_pa() - meanBias_pAspd;
   }
   float deltaP = runningSum / static_cast<float>(numberSamples);
@@ -217,4 +218,3 @@ void loop() {
 	GetAirspeed();
   delay(100);
 }
-
