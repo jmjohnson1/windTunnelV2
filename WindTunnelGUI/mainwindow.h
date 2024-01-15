@@ -41,10 +41,11 @@ private slots:
     void manualPowerSet();
     void scanPressureTaps();
     void tarePSensors();
+    void SetDensity();
 
     void updateAirpseed(QList<float> data);
 
-private:
+  private:
     void initActionsConnections();
     void showStatusMessage(const QString &message);
     void showWriteError(const QString &message);
@@ -59,7 +60,7 @@ private:
     AirfoilDialog *m_airfoil = nullptr;
     MessageHandler *m_messageHandler = nullptr;
     QByteArray messageReceived;
-    bool readInProgress = false;
+    bool m_readInProgress = false;
     sharedData *m_sharedData = nullptr;
 };
 #endif // MAINWINDOW_H

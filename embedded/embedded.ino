@@ -9,6 +9,7 @@
 
 #define MSG_ID_AIRSPEED 2
 #define MSG_ID_PRESSURE_TAP_READINGS 1
+#define MAX_ARG_LENGTH 10
 
 // MCP23017 //
 const uint8_t MCP_addr = 0x20;
@@ -111,12 +112,24 @@ void GetAirspeed() {
 
 void SetFanPower() {
   char *arg;
-	char *inputs[3];
+	char *inputBuffer[MAX_ARG_LENGTH];
+	int msgLength = 0;
 	int i = 0;
-	while ((arg = sCmd.next())) {
-		inputs[i] = arg;
+	while ((arg = sCmd.next()) != nullptr) {
+		if (msgLength < MAX_ARG_LENGTH) {
+		msgLength++;
+		inputBuffer[i] = arg;
+		i++;
+		}
 	}
-	int power = atoi(*inputs);
+	// Let's make sure any remaining space in the buffer is whitespace
+	if (msgLength < MAX_ARG_LENGTH) {
+		for (int i = msgLength; i < MAX_ARG_LENGTH; i++) {
+			inputBuffer[i] = " ";
+		}
+	}
+
+	int power = atoi(*inputBuffer);
   int powerScaled = 0;
 	// If the power settings is below 10%, use only one fan at power + 10%
 	if (power < 10 && power > 0) {
@@ -134,13 +147,25 @@ void SetFanPower() {
 }
 
 void SetSmokeFanPower() {
-	char *arg;
-	char *inputs[3];
+  char *arg;
+	char *inputBuffer[MAX_ARG_LENGTH];
+	int msgLength = 0;
 	int i = 0;
-	while ((arg = sCmd.next())) {
-		inputs[i] = arg;
+	while ((arg = sCmd.next()) != nullptr) {
+		if (msgLength < MAX_ARG_LENGTH) {
+		msgLength++;
+		inputBuffer[i] = arg;
+		i++;
+		}
 	}
-	int power = atoi(*inputs);
+	// Let's make sure any remaining space in the buffer is whitespace
+	if (msgLength < MAX_ARG_LENGTH) {
+		for (int i = msgLength; i < MAX_ARG_LENGTH; i++) {
+			inputBuffer[i] = " ";
+		}
+	}
+
+	int power = atoi(*inputBuffer);
 
   // Need to scale this to be bewteen 0 and 180
   int powerScaled = map(power, 0, 100, 0, 255);
@@ -168,6 +193,28 @@ float tarePSensor(bfs::Ams5915 *sensor) {
 void TareAllPSensors() {
 	meanBias_pAspd = tarePSensor(&pSensorAspd);
 	meanBias_pTaps = tarePSensor(&pSensorTaps);
+}
+
+void SetDensity() {
+  char *arg;
+	char *inputBuffer[MAX_ARG_LENGTH];
+	int msgLength = 0;
+	int i = 0;
+	while ((arg = sCmd.next()) != nullptr) {
+		if (msgLength < MAX_ARG_LENGTH) {
+		msgLength++;
+		inputBuffer[i] = arg;
+		i++;
+		}
+	}
+	// Let's make sure any remaining space in the buffer is whitespace
+	if (msgLength < MAX_ARG_LENGTH) {
+		for (int i = msgLength; i < MAX_ARG_LENGTH; i++) {
+			inputBuffer[i] = " ";
+		}
+	}
+
+	density = atof(inputBuffer);
 }
 
 void setup() {
@@ -201,6 +248,7 @@ void setup() {
 	sCmd.addCommand("!SETPOWER", SetFanPower);
   sCmd.addCommand("!SETSMOKE", SetSmokeFanPower);
 	sCmd.addCommand("!TARE", TareAllPSensors);
+	sCmd.addCommand("!SETDENSITY", SetDensity);
   sCmd.addDefaultHandler(unrecognized);  // Handler for command that isn't matched  (says "What?") 
 
 	pinMode(LED_BUILTIN, OUTPUT);
