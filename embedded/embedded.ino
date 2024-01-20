@@ -214,7 +214,11 @@ void setup() {
 }
 
 void loop() {
+
 	sCmd.readSerial();
 	GetAirspeed();
+  //ScanPressureTaps();
+  //TareAllPSensors();
+
   delay(100);
 }

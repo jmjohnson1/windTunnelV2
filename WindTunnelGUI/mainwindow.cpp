@@ -63,6 +63,7 @@ void MainWindow::openSerialPort() {
         ui->actionConnect->setEnabled(false);
         ui->actionDisconnect->setEnabled(true);
         ui->actionConfigure->setEnabled(false);
+        m_serial->setDataTerminalReady(true);
     } else {
         QMessageBox::critical(this, tr("Error"), m_serial->errorString());
     }
