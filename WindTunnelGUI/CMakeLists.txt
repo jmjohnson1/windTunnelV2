@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(WindTunnelGUI VERSION 0.1 LANGUAGES CXX)
+project(WindTunnelGUI VERSION 0.1 LANGUAGES CXX C)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -26,6 +26,8 @@ set(PROJECT_SOURCES
         qcustomplot.h
         qcustomplot.cpp
         messagehandler.h messagehandler.cpp
+        getPressure.c getPressure.h
+        sharedData.h
 )
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
@@ -34,7 +36,6 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(WindTunnelGUI
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        sharedData.h
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET WindTunnelGUI APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -58,6 +59,7 @@ target_link_libraries(WindTunnelGUI PRIVATE
     Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::PrintSupport
     Qt::SerialPort
+    CURL
 )
 
 set_target_properties(WindTunnelGUI PROPERTIES

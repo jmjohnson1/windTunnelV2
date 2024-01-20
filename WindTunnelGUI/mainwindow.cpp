@@ -37,10 +37,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_messageHandler, &MessageHandler::airspeedReady, this, &MainWindow::updateAirpseed);
     connect(m_messageHandler, &MessageHandler::pressureTapReady, m_airfoil, &AirfoilDialog::plotPressureData);
     connect(m_airfoil, &AirfoilDialog::runButtonPushed, this, &MainWindow::scanPressureTaps);
+    connect(ui->setDensityButton, &QPushButton::clicked, this, &MainWindow::SetDensity);
 
     m_airfoil->setSharedData(m_sharedData);
 
     initActionsConnections();
+    m_sharedData->GetBaroPressure(); // Updates baro value and calculates density
 }
 
 MainWindow::~MainWindow()
@@ -120,14 +122,14 @@ void MainWindow::readData() {
     qDebug() << data;
 
     // Check if read is in progress
-    if (readInProgress == true) {
+    if (m_readInProgress == true) {
         // Check if the current buffer contains a stop bit
         uint8_t stop_idx_plus1 = checkStopBit(&data);
         if (stop_idx_plus1 > 0) { // Stop bit exists in data
           for (int idx = 0; idx < stop_idx_plus1; idx++) {
               messageReceived.append(data[idx]);
           }
-          readInProgress = false;
+          m_readInProgress = false;
           m_messageHandler->handleMessage(messageReceived);
           messageReceived.clear();
           return;
@@ -141,14 +143,14 @@ void MainWindow::readData() {
         // Check if the current buffer contains a start bit
         uint8_t start_idx_plus1 = checkStartBit(&data);
         if (start_idx_plus1) { // Start bit exists in data
-          readInProgress = true;
+          m_readInProgress = true;
              // Check if the current buffer contains a stop bit
              uint8_t stop_idx_plus1 = checkStopBit(&data, start_idx_plus1 - 1);
              if (stop_idx_plus1 > 0) { // Stop bit exists in data
                for (int idx = 0; idx < stop_idx_plus1; idx++) {
                   messageReceived.append(data[idx]);
                }
-               readInProgress = false;
+               m_readInProgress = false;
                m_messageHandler->handleMessage(messageReceived);
                messageReceived.clear();
                return;
@@ -207,8 +209,8 @@ void MainWindow::showWriteError(const QString &message)
 void MainWindow::updateAirpseed(QList<float> data) {
     ui->speedLCD->display(data[0]);
     ui->dynamicPressureLCD->display(data[1]);
-    m_sharedData->setDynamicPressure(data[1]);
-    m_sharedData->setTsAirspeed(data[0]);
+    m_sharedData->SetDynamicPressure(data[1]);
+    m_sharedData->SetTsAirspeed(data[0]);
 }
 
 // COMMANDS
@@ -240,6 +242,15 @@ void MainWindow::autoSpeedSet()
 
 void MainWindow::tarePSensors() {
     QByteArray command("!TARE");
+    command.append("\r\n");
+    qDebug() << command;
+    writeData(command);
+}
+
+void MainWindow::SetDensity() {
+    m_sharedData->GetBaroPressure();
+    QByteArray command("!SETDENSITY ");
+    command.append(QByteArray::number(m_sharedData->GetDensity()));
     command.append("\r\n");
     qDebug() << command;
     writeData(command);

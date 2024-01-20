@@ -1,24 +1,31 @@
-#include "Wire.h"
-#include "Servo.h"
+#include <Wire.h>
+#include <Servo.h>
+
+#include <TI_TCA9548A.h> // I2C multiplexer
 
 #include "src/ams5915/src/ams5915.h"
-#include "src/arduino-mcp23017/src/MCP23017.h"
-#include "src/ArduinoSerialCommand/SerialCommand.h"
+#include "src/arduino-mcp23017/src/MCP23017.h" // IO expander
+#include "src/ArduinoSerialCommand/SerialCommand.h" // Serial command handler
+#include "src/DLHR/src/AllSensors_DLHR.h"  // Pressure sensors
 
 #include "pressureTap.h"
 
 #define MSG_ID_AIRSPEED 2
 #define MSG_ID_PRESSURE_TAP_READINGS 1
+#define MAX_ARG_LENGTH 10
+
+#define TCAADDR 0x70
 
 // MCP23017 //
 const uint8_t MCP_addr = 0x20;
 MCP23017 mcp = MCP23017(MCP_addr, Wire);
 
-// AMS 5915 //
-const uint8_t pSensorTaps_addr = 0x22;
-const uint8_t pSensorAspd_addr = 0x23;
-bfs::Ams5915 pSensorTaps(&Wire, pSensorTaps_addr, bfs::Ams5915::AMS5915_0020_D_B);
-bfs::Ams5915 pSensorAspd(&Wire, pSensorAspd_addr, bfs::Ams5915::AMS5915_0020_D_B);
+// TCA9548A //
+TI_TCA9548A tca9548a(&Wire);
+
+// DLHR //
+AllSensors_DLHR_L02D_8 pSensorAspd(&Wire);
+AllSensors_DLHR_L02D_8 pSensorTaps(&Wire);
 float meanBias_pAspd = 0.0f;
 float meanBias_pTaps = 0.0f;
 float density = 1.225f;
@@ -46,26 +53,26 @@ const uint8_t sol19_pin = 1;
 const uint8_t sol20_pin = 0;
 
 pressureTap valveArray[] = {
-	pressureTap(sol1_pinMCP, 1, &pSensorTaps, &mcp),
-	pressureTap(sol2_pinMCP, 1, &pSensorTaps, &mcp),
-	pressureTap(sol3_pinMCP, 1, &pSensorTaps, &mcp),
-	pressureTap(sol4_pinMCP, 1, &pSensorTaps, &mcp),
-	pressureTap(sol5_pinMCP, 1, &pSensorTaps, &mcp),
-	pressureTap(sol6_pinMCP, 1, &pSensorTaps, &mcp),
-	pressureTap(sol7_pinMCP, 1, &pSensorTaps, &mcp),
-	pressureTap(sol8_pinMCP, 1, &pSensorTaps, &mcp),
-	pressureTap(sol9_pinMCP, 1, &pSensorTaps, &mcp),
-	pressureTap(sol10_pinMCP, 1, &pSensorTaps, &mcp),
-	pressureTap(sol11_pinMCP, 1, &pSensorTaps, &mcp),
-	pressureTap(sol12_pinMCP, 1, &pSensorTaps, &mcp),
-	pressureTap(sol13_pinMCP, 1, &pSensorTaps, &mcp),
-	pressureTap(sol14_pinMCP, 1, &pSensorTaps, &mcp),
-	pressureTap(sol15_pinMCP, 1, &pSensorTaps, &mcp),
-	pressureTap(sol16_pinMCP, 1, &pSensorTaps, &mcp),
-	pressureTap(sol17_pin, 0, &pSensorTaps, &mcp),
-	pressureTap(sol18_pin, 0, &pSensorTaps, &mcp),
-	pressureTap(sol19_pin, 0, &pSensorTaps, &mcp),
-	pressureTap(sol20_pin, 0, &pSensorTaps, &mcp)
+	pressureTap(sol1_pinMCP, 1, &tca9548a, &pSensorTaps, &mcp),
+	pressureTap(sol2_pinMCP, 1, &tca9548a, &pSensorTaps, &mcp),
+	pressureTap(sol3_pinMCP, 1, &tca9548a, &pSensorTaps, &mcp),
+	pressureTap(sol4_pinMCP, 1, &tca9548a, &pSensorTaps, &mcp),
+	pressureTap(sol5_pinMCP, 1, &tca9548a, &pSensorTaps, &mcp),
+	pressureTap(sol6_pinMCP, 1, &tca9548a, &pSensorTaps, &mcp),
+	pressureTap(sol7_pinMCP, 1, &tca9548a, &pSensorTaps, &mcp),
+	pressureTap(sol8_pinMCP, 1, &tca9548a, &pSensorTaps, &mcp),
+	pressureTap(sol9_pinMCP, 1, &tca9548a, &pSensorTaps, &mcp),
+	pressureTap(sol10_pinMCP, 1, &tca9548a, &pSensorTaps, &mcp),
+	pressureTap(sol11_pinMCP, 1, &tca9548a, &pSensorTaps, &mcp),
+	pressureTap(sol12_pinMCP, 1, &tca9548a, &pSensorTaps, &mcp),
+	pressureTap(sol13_pinMCP, 1, &tca9548a, &pSensorTaps, &mcp),
+	pressureTap(sol14_pinMCP, 1, &tca9548a, &pSensorTaps, &mcp),
+	pressureTap(sol15_pinMCP, 1, &tca9548a, &pSensorTaps, &mcp),
+	pressureTap(sol16_pinMCP, 1, &tca9548a, &pSensorTaps, &mcp),
+	pressureTap(sol17_pin, 0, &tca9548a, &pSensorTaps, &mcp),
+	pressureTap(sol18_pin, 0, &tca9548a, &pSensorTaps, &mcp),
+	pressureTap(sol19_pin, 0, &tca9548a, &pSensorTaps, &mcp),
+	pressureTap(sol20_pin, 0, &tca9548a, &pSensorTaps, &mcp)
 };
 
 // Fans
@@ -88,12 +95,14 @@ void ScanPressureTaps() {
 }
 
 void GetAirspeed() {
-  pSensorAspd.Read();
   static uint8_t numberSamples = 10;
   float runningSum = 0;
+  tca9548a.selectChannel(1);
   for (int i = 0; i < numberSamples; i++) {
-		pSensorAspd.Read();
-    runningSum += pSensorAspd.pres_pa() - meanBias_pAspd;
+	bool condition = pSensorAspd.readDataAsynchro();
+	if (condition) {
+		runningSum += (pSensorAspd.pressure - meanBias_pAspd);
+	}
   }
   float deltaP = runningSum / static_cast<float>(numberSamples);
 	float aspd = sqrt(2.0f*deltaP / density);
@@ -111,12 +120,24 @@ void GetAirspeed() {
 
 void SetFanPower() {
   char *arg;
-	char *inputs[3];
+	char *inputBuffer[MAX_ARG_LENGTH];
+	int msgLength = 0;
 	int i = 0;
-	while ((arg = sCmd.next())) {
-		inputs[i] = arg;
+	while ((arg = sCmd.next()) != nullptr) {
+		if (msgLength < MAX_ARG_LENGTH) {
+		msgLength++;
+		inputBuffer[i] = arg;
+		i++;
+		}
 	}
-	int power = atoi(*inputs);
+	// Let's make sure any remaining space in the buffer is whitespace
+	if (msgLength < MAX_ARG_LENGTH) {
+		for (int i = msgLength; i < MAX_ARG_LENGTH; i++) {
+			inputBuffer[i] = " ";
+		}
+	}
+
+	int power = atoi(*inputBuffer);
   int powerScaled = 0;
 	// If the power settings is below 10%, use only one fan at power + 10%
 	if (power < 10 && power > 0) {
@@ -134,13 +155,25 @@ void SetFanPower() {
 }
 
 void SetSmokeFanPower() {
-	char *arg;
-	char *inputs[3];
+  char *arg;
+	char *inputBuffer[MAX_ARG_LENGTH];
+	int msgLength = 0;
 	int i = 0;
-	while ((arg = sCmd.next())) {
-		inputs[i] = arg;
+	while ((arg = sCmd.next()) != nullptr) {
+		if (msgLength < MAX_ARG_LENGTH) {
+		msgLength++;
+		inputBuffer[i] = arg;
+		i++;
+		}
 	}
-	int power = atoi(*inputs);
+	// Let's make sure any remaining space in the buffer is whitespace
+	if (msgLength < MAX_ARG_LENGTH) {
+		for (int i = msgLength; i < MAX_ARG_LENGTH; i++) {
+			inputBuffer[i] = " ";
+		}
+	}
+
+	int power = atoi(*inputBuffer);
 
   // Need to scale this to be bewteen 0 and 180
   int powerScaled = map(power, 0, 100, 0, 255);
@@ -154,20 +187,55 @@ void unrecognized()
   Serial.println("What?"); 
 }
 
-float tarePSensor(bfs::Ams5915 *sensor) {
-	int numSamples = 1000;
-	float sum = 0;
-	for (int i = 0; i < numSamples; i++) {
-		sensor->Read();
-		sum += sensor->pres_pa();
-	}
-	float meanBias = sum/numSamples;
+float tarePSensor(AllSensors_DLHR_L02D_8 *sensor, uint8_t channel) {
+	// int numSamples = 1000;
+	// float sum = 0;
+	// tca9548a.selectChannel(channel);
+	// for (int i = 0; i < numSamples; i++) {
+	// 	bool condition = sensor->readDataAsynchro();
+	// 	if (condition) {
+	// 		sum += sensor->pressure;
+	// 	}
+	// }
+	// float meanBias = sum/numSamples;
+
+  bool condition = false;
+  tca9548a.selectChannel(channel);
+  while(!condition) {
+    condition = sensor->readDataAsynchro(AllSensors_DLHR::AVERAGE16);
+  }
+
+  float meanBias = sensor->pressure;
+	
+  Serial.print(meanBias);
 	return meanBias;
 }
 
 void TareAllPSensors() {
-	meanBias_pAspd = tarePSensor(&pSensorAspd);
-	meanBias_pTaps = tarePSensor(&pSensorTaps);
+	meanBias_pAspd = tarePSensor(&pSensorAspd, 1);
+	meanBias_pTaps = tarePSensor(&pSensorTaps, 0);
+}
+
+void SetDensity() {
+  char *arg;
+	char *inputBuffer[MAX_ARG_LENGTH];
+	int msgLength = 0;
+	int i = 0;
+	while ((arg = sCmd.next()) != nullptr) {
+		if (msgLength < MAX_ARG_LENGTH) {
+		msgLength++;
+		inputBuffer[i] = arg;
+		i++;
+		}
+	}
+	// Let's make sure any remaining space in the buffer is whitespace
+	if (msgLength < MAX_ARG_LENGTH) {
+		for (int i = msgLength; i < MAX_ARG_LENGTH; i++) {
+			inputBuffer[i] = " ";
+		}
+	}
+
+	density = atof(*inputBuffer);
 }
 
 void setup() {
@@ -177,13 +245,11 @@ void setup() {
   Wire.begin();
   Wire.setClock(100000);
 	// Wait 100 milliseconds
-	delay(100);
-  if (!pSensorTaps.Begin()) {
-    Serial.println("Pressure sensor 1 failed to initialize");
-  }
-  if (!pSensorAspd.Begin()) {
-    Serial.println("Pressure sensor 2 failed to initialize");
-  }
+  delay(100);
+
+  pSensorAspd.setPressureUnit(AllSensors_DLHR::PressureUnit::PASCAL);
+  pSensorTaps.setPressureUnit(AllSensors_DLHR::PressureUnit::PASCAL);
+
   mcp.begin();
   // Configure all pins on MCP as outputs
   mcp.portMode(MCP23017Port::A, 0);
@@ -201,6 +267,7 @@ void setup() {
 	sCmd.addCommand("!SETPOWER", SetFanPower);
   sCmd.addCommand("!SETSMOKE", SetSmokeFanPower);
 	sCmd.addCommand("!TARE", TareAllPSensors);
+	sCmd.addCommand("!SETDENSITY", SetDensity);
   sCmd.addDefaultHandler(unrecognized);  // Handler for command that isn't matched  (says "What?") 
 
 	pinMode(LED_BUILTIN, OUTPUT);
@@ -217,8 +284,6 @@ void loop() {
 
 	sCmd.readSerial();
 	GetAirspeed();
-  //ScanPressureTaps();
-  //TareAllPSensors();
 
   delay(100);
 }

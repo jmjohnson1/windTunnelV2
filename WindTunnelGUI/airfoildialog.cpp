@@ -66,10 +66,11 @@ void AirfoilDialog::plotPressureData(QList<double> data) {
     for (int i = 0; i < data.size(); i++) {
         // Data is the difference between static pressure at tap and free stream pressure
         // Cp = (p_s - p_inf) / q_inf
-        data[i] = data[i]/af_sharedData->getDynamicPressure();
+        data[i] = data[i]/af_sharedData->GetDynamicPressure();
     }
 
     ui->AirfoilDataPlot->graph(0)->setData(x, data, true);
+    ui->AirfoilDataPlot->replot();
     for (int ndx = 0; ndx < numberTaps; ndx++) {
         rawPValue[ndx].setText(QVariant(data[ndx]).toString());
     }
