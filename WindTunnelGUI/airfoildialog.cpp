@@ -70,6 +70,7 @@ void AirfoilDialog::plotPressureData(QList<double> data) {
     }
 
     ui->AirfoilDataPlot->graph(0)->setData(x, data, true);
+    ui->AirfoilDataPlot->replot();
     for (int ndx = 0; ndx < numberTaps; ndx++) {
         rawPValue[ndx].setText(QVariant(data[ndx]).toString());
     }
