@@ -5,7 +5,7 @@
 #include "getPressure.h"
 #include <stdio.h>
 #include <string.h>
-#include <regex.h>
+#include <pcre2posix.h>
 
 #include <curl/curl.h>
 
@@ -71,14 +71,14 @@ double FetchBaroPressure(){
 		char *matchedExpr;
 		int matchSize;
 
-		returnStatus = regcomp(&regex, regExpr, REG_EXTENDED);
+        returnStatus = pcre2_regcomp(&regex, regExpr, REG_EXTENDED);
 		if (returnStatus) {
 			fprintf(stderr, "Could not compile regex\n");
 			exit(pressure_pa);
 		}
 
 		/* Execute regular expression */
-		returnStatus = regexec(&regex, chunk.memory, 2, match, 0);
+        returnStatus = pcre2_regexec(&regex, chunk.memory, 2, match, 0);
 		if (!returnStatus) { /* Match */
 			/* Store the match */
 			matchSize = (int)(match[1].rm_eo - match[1].rm_so);
@@ -96,7 +96,7 @@ double FetchBaroPressure(){
 		}
 
 		/* Free memory allocated to the pattern buffer by regcomp() */
-		regfree(&regex);
+        pcre2_regfree(&regex);
   }
  
   /* cleanup curl stuff */

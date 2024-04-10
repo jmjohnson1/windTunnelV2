@@ -48,7 +48,7 @@ AirfoilDialog::~AirfoilDialog()
 void AirfoilDialog::SetupPlot() {
     ui->AirfoilDataPlot->addGraph();
     ui->AirfoilDataPlot->xAxis->setRange(0, 1);
-    ui->AirfoilDataPlot->yAxis->setRange(-1, 1);
+    ui->AirfoilDataPlot->yAxis->setRange(-3, 1.2);
     ui->AirfoilDataPlot->xAxis->setLabel(QString::fromUtf8("x/c"));
     ui->AirfoilDataPlot->yAxis->setLabel(QString::fromUtf8("Cₚ"));
     ui->AirfoilDataPlot->graph(0)->setLineStyle(QCPGraph::lsLine);
@@ -69,7 +69,26 @@ void AirfoilDialog::plotPressureData(QList<double> data) {
         data[i] = data[i]/af_sharedData->GetDynamicPressure();
     }
 
+
+    // Split the data into top and bottom taps
+    QList<double> x_top;
+    QList<double> data_top;
+    QList<double> x_bot;
+    QList<double> data_bot;
+    for (int i = 0; i < data.size()/2; i++) {
+        x_top.push_back(x[i]);
+        data_top.push_back(x[i]);
+    }
+    for (int i = data.size()/2; i < data.size(); i++) {
+        x_bot.push_back(x[i]);
+        data_bot.push_back(x[i]);
+    }
+
     ui->AirfoilDataPlot->graph(0)->setData(x, data, true);
+    //ui->AirfoilDataPlot->graph(0)->setData(x_top, data_top, true);
+    //ui->AirfoilDataPlot->graph(0)->setPen(QPen(Qt::blue));
+    //ui->AirfoilDataPlot->graph(0)->setData(x_bot, data_bot, true);
+    //ui->AirfoilDataPlot->graph(0)->setPen(QPen(Qt::red));
     ui->AirfoilDataPlot->replot();
     for (int ndx = 0; ndx < numberTaps; ndx++) {
         rawPValue[ndx].setText(QVariant(data[ndx]).toString());

@@ -2,15 +2,14 @@
 #include "core_pins.h"
 
 
-pressureTap::pressureTap(int pinNum, int pinLoc, TI_TCA9548A *multiplexer, AllSensors_DLHR_L02D_8 *pSensor, MCP23017 *mcp, int sampleFreq = 1) {
+pressureTap::pressureTap(int pinNum, int pinLoc, TI_TCA9548A *multiplexer, AllSensors_DLHR_L02D_8 *pSensor, MCP23017 *mcp) {
 	pinNumber = pinNum;
 	pinLocation = pinLoc;
 	pressureReading = 0;
 	temperatureReading = 0;
 	pressureSensor = pSensor;
 	ioExpander = mcp;
-	sampleFrequency = sampleFreq;
-	samplePeriod = static_cast<int>(1.0f/static_cast<float>(sampleFreq)*1000.0f); // ms
+	samplePeriod = static_cast<int>(1.0f/static_cast<float>(sampleFrequency)*1000.0f); // ms
 	tca9548a = multiplexer;
 }
 
@@ -24,16 +23,14 @@ void pressureTap::UpdatePressure() {
 	}
   // Read data
 	float runningSum = 0;
-  	int numberSampled = 0;
+  int numberSampled = 0;
 	tca9548a->selectChannel(multiplexerChannel);
-  	while(millis() - startTime < samplePeriod) {
-	bool condition = pressureSensor->readDataAsynchro();
-	if (condition) {
-		runningSum += pressureSensor->pressure;
-		numberSampled++;
-	}
+  delay(samplePeriod);
+  bool condition = false;
+  while(condition == false) {
+	  condition = pressureSensor->readDataAsynchro(AllSensors_DLHR::AVERAGE16);
   }
-  pressureReading = runningSum / static_cast<float>(numberSampled);
+  pressureReading = pressureSensor->pressure;
   // Close valve
 	if (pinLocation) {
 		ioExpander->digitalWrite(pinNumber, LOW);

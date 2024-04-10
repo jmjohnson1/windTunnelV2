@@ -16,6 +16,8 @@
 
 #define TCAADDR 0x70
 
+int sel = 0;
+
 // MCP23017 //
 const uint8_t MCP_addr = 0x20;
 MCP23017 mcp = MCP23017(MCP_addr, Wire);
@@ -31,26 +33,26 @@ float meanBias_pTaps = 0.0f;
 float density = 1.225f;
 
 // Solenoid valve pins //
-const uint8_t sol1_pinMCP = 0;
-const uint8_t sol2_pinMCP = 1;
-const uint8_t sol3_pinMCP = 2;
-const uint8_t sol4_pinMCP = 3;
-const uint8_t sol5_pinMCP = 4;
-const uint8_t sol6_pinMCP = 5;
-const uint8_t sol7_pinMCP = 6;
-const uint8_t sol8_pinMCP = 7;
-const uint8_t sol9_pinMCP = 8;
-const uint8_t sol10_pinMCP = 9;
-const uint8_t sol11_pinMCP = 10;
-const uint8_t sol12_pinMCP = 11;
-const uint8_t sol13_pinMCP = 12;
-const uint8_t sol14_pinMCP = 13;
-const uint8_t sol15_pinMCP = 14;
-const uint8_t sol16_pinMCP = 15;
-const uint8_t sol17_pin = 3;
-const uint8_t sol18_pin = 2;
-const uint8_t sol19_pin = 1;
-const uint8_t sol20_pin = 0;
+const uint8_t sol9_pinMCP = 0;
+const uint8_t sol10_pinMCP = 1;
+const uint8_t sol11_pinMCP = 2;
+const uint8_t sol12_pinMCP = 3;
+const uint8_t sol13_pinMCP = 4;
+const uint8_t sol14_pinMCP = 5;
+const uint8_t sol15_pinMCP = 6;
+const uint8_t sol16_pinMCP = 7;
+const uint8_t sol1_pinMCP = 8;
+const uint8_t sol2_pinMCP = 9;
+const uint8_t sol3_pinMCP = 10;
+const uint8_t sol4_pinMCP = 11;
+const uint8_t sol5_pinMCP = 12;
+const uint8_t sol6_pinMCP = 13;
+const uint8_t sol7_pinMCP = 14;
+const uint8_t sol8_pinMCP = 15;
+const uint8_t sol20_pin = 3;
+const uint8_t sol19_pin = 2;
+const uint8_t sol18_pin = 1;
+const uint8_t sol17_pin = 0;
 
 pressureTap valveArray[] = {
 	pressureTap(sol1_pinMCP, 1, &tca9548a, &pSensorTaps, &mcp),
@@ -98,13 +100,19 @@ void GetAirspeed() {
   static uint8_t numberSamples = 10;
   float runningSum = 0;
   tca9548a.selectChannel(1);
-  for (int i = 0; i < numberSamples; i++) {
-	bool condition = pSensorAspd.readDataAsynchro();
-	if (condition) {
-		runningSum += (pSensorAspd.pressure - meanBias_pAspd);
-	}
+  // for (int i = 0; i < numberSamples; i++) {
+	// bool condition = pSensorAspd.readDataAsynchro();
+	// if (condition) {
+	// 	// runningSum += (pSensorAspd.pressure - meanBias_pAspd);
+  //   //
+	// }
+  // }
+  bool condition = 0;
+  while (!condition) {
+     condition = pSensorAspd.readDataAsynchro();
   }
-  float deltaP = runningSum / static_cast<float>(numberSamples);
+  // float deltaP = runningSum / static_cast<float>(numberSamples);
+  float deltaP = pSensorAspd.pressure - meanBias_pAspd;
 	float aspd = sqrt(2.0f*deltaP / density);
   if (deltaP < 0.0f) {
     aspd = 0.0f;
@@ -200,20 +208,31 @@ float tarePSensor(AllSensors_DLHR_L02D_8 *sensor, uint8_t channel) {
 	// float meanBias = sum/numSamples;
 
   bool condition = false;
+  float meanBias = 0.0f;
   tca9548a.selectChannel(channel);
-  while(!condition) {
-    condition = sensor->readDataAsynchro(AllSensors_DLHR::AVERAGE16);
+  for (int i = 0; i < 5; i++) {
+    readData:
+      condition = sensor->readDataAsynchro(AllSensors_DLHR::AVERAGE16);
+
+    if (condition) {
+      meanBias += sensor->pressure;
+      delay(100);
+    } else {
+      goto readData;
+    }
   }
 
-  float meanBias = sensor->pressure;
+  meanBias = meanBias/5.0f;
 	
-  Serial.print(meanBias);
+  Serial.println(meanBias);
 	return meanBias;
 }
 
 void TareAllPSensors() {
 	meanBias_pAspd = tarePSensor(&pSensorAspd, 1);
-	meanBias_pTaps = tarePSensor(&pSensorTaps, 0);
+  digitalWrite(sol17_pin, HIGH);
+  meanBias_pTaps = tarePSensor(&pSensorTaps, 0);
+  digitalWrite(sol17_pin, LOW);
 }
 
 void SetDensity() {
@@ -286,4 +305,11 @@ void loop() {
 	GetAirspeed();
 
   delay(100);
+  // while (Serial.available()) {
+  //   sel = Serial.parseInt();
+  // }
+  
+
+  // valveArray[sel].UpdatePressure();
+  // Serial.println(valveArray[sel].GetPressure() - meanBias_pTaps);
 }

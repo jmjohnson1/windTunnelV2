@@ -9,7 +9,7 @@
 
 class pressureTap {
 public:
-	pressureTap(int pinNum, int pinLoc, TI_TCA9548A *multiplexer, AllSensors_DLHR_L02D_8 *pSensor, MCP23017 *mcp, int sampleFreq = 1);
+	pressureTap(int pinNum, int pinLoc, TI_TCA9548A *multiplexer, AllSensors_DLHR_L02D_8 *pSensor, MCP23017 *mcp);
 
 	void UpdatePressure();
 	void UpdateTemperature();
@@ -25,7 +25,7 @@ private:
 	uint8_t pinLocation; // 0 for Teensy pin, 1 for pin on MCP23017
 	float pressureReading;
 	float temperatureReading;
-	int sampleFrequency;
+	int sampleFrequency=1;
 	int samplePeriod;
 	AllSensors_DLHR_L02D_8 *pressureSensor = nullptr;
 	MCP23017 *ioExpander = nullptr;

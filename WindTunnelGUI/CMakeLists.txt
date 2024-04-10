@@ -60,6 +60,7 @@ target_link_libraries(WindTunnelGUI PRIVATE
     Qt${QT_VERSION_MAJOR}::PrintSupport
     Qt::SerialPort
     CURL
+    pcre2-posix
 )
 
 set_target_properties(WindTunnelGUI PROPERTIES
